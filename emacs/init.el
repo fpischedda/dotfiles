@@ -33,6 +33,29 @@
   :ensure t
   :init (load-theme 'zenburn t))
 
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-search-module 'evil-search)
+  (setq evil-ex-complete-emacs-commands nil)
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
+  (setq evil-shift-round nil)
+  (setq evil-want-C-u-scroll t)
+  :config (evil-mode 1))
+
+(use-package evil-nerd-commenter
+  :ensure t
+  :config (evilnc-default-hotkeys))
+
+(use-package evil-surround
+  :ensure t
+  :config (global-evil-surround-mode 1))
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
 (use-package parinfer
   :ensure t
   :bind
@@ -41,12 +64,11 @@
   (progn
     (setq parinfer-extensions
           '(defaults       ; should be included.
-            pretty-parens  ; different paren styles for different modes.
-            evil           ; If you use Evil.
-            lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
-            paredit        ; Introduce some paredit commands.
-            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-            smart-yank))   ; Yank behavior depend on mode.
+             pretty-parens  ; different paren styles for different modes.
+             evil           ; If you use Evil.
+             paredit        ; Introduce some paredit commands.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
     (add-hook 'clojure-mode-hook #'parinfer-mode)
     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
@@ -56,14 +78,6 @@
 (use-package wakatime-mode
   :ensure t
   :init (global-wakatime-mode))
-
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
-(use-package evil-nerd-commenter
-  :ensure t
-  :config (evilnc-default-hotkeys))
 
 (use-package smartparens
   :ensure t
@@ -94,22 +108,7 @@
   :init
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-search-module 'evil-search)
-  (setq evil-ex-complete-emacs-commands nil)
-  (setq evil-vsplit-window-right t)
-  (setq evil-split-window-below t)
-  (setq evil-shift-round nil)
-  (setq evil-want-C-u-scroll t)
-  :config (evil-mode 1))
-
-(use-package evil-surround
-  :ensure t
-  :config (global-evil-surround-mode 1))
-
-; powerline - now disabled while testing doom-modeline
+					; powerline - now disabled while testing doom-modeline
 (use-package powerline
   :ensure t
   :config (powerline-default-theme))
