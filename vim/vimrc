@@ -1,0 +1,77 @@
+call plug#begin()
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'itchyny/lightline.vim'
+
+Plug 'scrooloose/nerdcommenter'
+" Class/module browser
+Plug 'majutsushi/tagbar'
+" Code and files fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+" Extension to ctrlp, for fuzzy command finder
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+
+" Autoclose
+Plug 'Townk/vim-autoclose'
+" Indent text object
+Plug 'michaeljsmith/vim-indent-object'
+" Indentation based movements
+Plug 'jeetsukumaran/vim-indentwise'
+" Python
+Plug 'python-mode/python-mode'
+Plug 'ambv/black'
+" Python autocompletion, go to definition.
+Plug 'davidhalter/jedi-vim'
+" Better autocompletion
+Plug 'Shougo/neocomplcache.vim'
+" Python and other languages code checker
+Plug 'scrooloose/syntastic'
+
+" Clojure
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Rust
+Plug 'rust-lang/rust'
+Plug 'racer-rust/vim-racer'
+
+" Elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
+" Language Server Protocol
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
+
+call plug#end()
+
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+set clipboard="unnamedplus"
+
+" Activate FOCUS mode with F12
+nmap <F12> :Goyo <bar> Limelight!!<CR>"
+
+
+" Change the cursor from block to i-beam in INSERT mode
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[1 q"
+augroup myCmds
+  au!
+  autocmd VimEnter * silent !echo -ne "\e[1 q"
+augroup END
+
+autocmd BufWritePre *.py execute ':Black'
+
+" Racer key bindings
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" open a terminal in a vertical split
+command VTerm :vs|:term ++curwin

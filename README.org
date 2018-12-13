@@ -1,0 +1,17 @@
+This repo should help me not lose my configs...
+
+* Applications
+
+** Emacs
+*** Dependencies
+Requires use-package
+
+*** Installation
+Symlink emacs.el to ~/.emacs.d/init.el
+
+** Vim
+*** Dependencies
+Requires plug.vim
+
+*** Installation
+Symlink vim/vimrc to ~/.vimrc
