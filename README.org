@@ -6,12 +6,19 @@ This repo should help me not lose my configs...
 *** Dependencies
 Requires use-package
 
+It can be copied or fetched from its repo directly to ~/.emacs.d
+or installed using M-x package-install
+It is suggested to run M-x package-refresh-content before running emacs
+with this init.el file to have a fresh copy of the package index.
+
 *** Installation
 Symlink emacs.el to ~/.emacs.d/init.el
 
 ** Vim
 *** Dependencies
-Requires plug.vim
+Requires vim-plug (plug.vim)
+Please refer to https://github.com/junegunn/vim-plug for detailed
+instructions
 
 *** Installation
 Symlink vim/vimrc to ~/.vimrc
