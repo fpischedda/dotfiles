@@ -28,6 +28,10 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package exec-path-from-shell
+  :ensure t
+  :config (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize)))
 
 (use-package zenburn-theme
   :ensure t
@@ -60,7 +64,7 @@
   :ensure t
   :bind
   (("C-," . parinfer-toggle-mode))
-  :init
+  :config
   (progn
     (setq parinfer-extensions
           '(defaults       ; should be included.
