@@ -8,8 +8,11 @@ Requires use-package
 
 It can be copied or fetched from its repo directly to ~/.emacs.d
 or installed using M-x package-install
-It is suggested to run M-x package-refresh-content before running emacs
-with this init.el file to have a fresh copy of the package index.
+
+When runnin Emacs for first time the installation of the packages
+will probably fail if the package index is not up to date, in this
+case run M-x package-refresh-contents and restart Emacs; the installation
+process should succed now.
 
 *** Installation
 Symlink emacs.el to ~/.emacs.d/init.el
