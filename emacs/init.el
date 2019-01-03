@@ -12,6 +12,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (global-display-line-numbers-mode)
+(setq column-number-mode t)
 
 (show-paren-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
