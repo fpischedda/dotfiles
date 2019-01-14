@@ -38,6 +38,10 @@
   :ensure t
   :init (load-theme 'zenburn t))
 
+(use-package deadgrep
+  :ensure t
+  :bind (("<f5>" . deadgrep)))
+
 (use-package evil
   :ensure t
   :init
@@ -47,6 +51,7 @@
   (setq evil-split-window-below t)
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
+  (setq evil-want-keybinding nil)
   :config (evil-mode 1)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -60,6 +65,12 @@
 (use-package evil-surround
   :ensure t
   :config (global-evil-surround-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init 'deadgrep))
 
 (use-package which-key
   :ensure t
