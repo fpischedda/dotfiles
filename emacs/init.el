@@ -70,7 +70,7 @@
   :after evil
   :ensure t
   :config
-  (evil-collection-init 'deadgrep))
+  (evil-collection-init '(deadgrep dired)))
 
 (use-package which-key
   :ensure t
