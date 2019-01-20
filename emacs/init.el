@@ -42,35 +42,35 @@
   :ensure t
   :bind (("<f5>" . deadgrep)))
 
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-search-module 'evil-search)
-  (setq evil-ex-complete-emacs-commands nil)
-  (setq evil-vsplit-window-right t)
-  (setq evil-split-window-below t)
-  (setq evil-shift-round nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-keybinding nil)
-  :config (evil-mode 1)
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
-
-(use-package evil-nerd-commenter
-  :ensure t
-  :config (evilnc-default-hotkeys))
-
-(use-package evil-surround
-  :ensure t
-  :config (global-evil-surround-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init '(deadgrep dired)))
+;; (use-package evil
+;;   :ensure t
+;;   :init
+;;   (setq evil-search-module 'evil-search)
+;;   (setq evil-ex-complete-emacs-commands nil)
+;;   (setq evil-vsplit-window-right t)
+;;   (setq evil-split-window-below t)
+;;   (setq evil-shift-round nil)
+;;   (setq evil-want-C-u-scroll t)
+;;   (setq evil-want-keybinding nil)
+;;   :config (evil-mode 1)
+;;   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+;;   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+;;   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+;;   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
+;; 
+;; (use-package evil-nerd-commenter
+;;   :ensure t
+;;   :config (evilnc-default-hotkeys))
+;; 
+;; (use-package evil-surround
+;;   :ensure t
+;;   :config (global-evil-surround-mode 1))
+;; 
+;; (use-package evil-collection
+;;   :after evil
+;;   :ensure t
+;;   :config
+;;   (evil-collection-init '(deadgrep dired)))
 
 (use-package which-key
   :ensure t
@@ -85,7 +85,7 @@
     (setq parinfer-extensions
           '(defaults       ; should be included.
              pretty-parens  ; different paren styles for different modes.
-             evil           ; If you use Evil.
+             ;; evil           ; If you use Evil.
              paredit        ; Introduce some paredit commands.
              smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
              smart-yank))   ; Yank behavior depend on mode.
