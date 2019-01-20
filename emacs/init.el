@@ -57,15 +57,15 @@
 ;;   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
 ;;   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 ;;   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
-;; 
+;;
 ;; (use-package evil-nerd-commenter
 ;;   :ensure t
 ;;   :config (evilnc-default-hotkeys))
-;; 
+;;
 ;; (use-package evil-surround
 ;;   :ensure t
 ;;   :config (global-evil-surround-mode 1))
-;; 
+;;
 ;; (use-package evil-collection
 ;;   :after evil
 ;;   :ensure t
