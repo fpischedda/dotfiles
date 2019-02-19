@@ -43,8 +43,8 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 
 " Language Server Protocol
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
 
 call plug#end()
 
