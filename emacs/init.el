@@ -128,10 +128,10 @@
   :init
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
-					; powerline - now disabled while testing doom-modeline
-(use-package powerline
-  :ensure t
-  :config (powerline-default-theme))
+;; powerline - now disabled while testing doom-modeline
+;; (use-package powerline
+;;   :ensure t
+;;   :config (powerline-default-theme))
 
 (use-package all-the-icons
   :ensure t)
@@ -199,6 +199,13 @@
   (setq inferior-lisp-program "sbcl")
   :config
   (slime-mode t))
+
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t)
+   (emacs-lisp . t)
+   (python . t)))
 
 (use-package ox-reveal
   :ensure t
@@ -315,7 +322,7 @@
  '(clojure-indent-style :always-indent)
  '(package-selected-packages
    (quote
-    (cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
+    (all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
