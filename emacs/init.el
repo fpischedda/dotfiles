@@ -313,6 +313,10 @@
 (use-package docker-compose-mode
   :ensure t)
 
+;; setup gopher.el
+(add-to-list 'load-path "~/gopher.el/")
+(load "gopher")
+
 ;;; .emacs ends here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -322,7 +326,7 @@
  '(clojure-indent-style :always-indent)
  '(package-selected-packages
    (quote
-    (all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
+    (groovy-mode jenkins all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
