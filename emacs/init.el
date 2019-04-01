@@ -325,6 +325,7 @@
 ;; setup gopher.el
 (add-to-list 'load-path "~/gopher.el/")
 (load "gopher")
+(add-to-list 'evil-emacs-state-modes 'gopher-mode)
 
 ;;; .emacs ends here
 (custom-set-variables
