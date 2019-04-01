@@ -38,6 +38,14 @@
   :ensure t
   :init (load-theme 'zenburn t))
 
+(use-package plantuml-mode
+  :ensure t)
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
 (use-package deadgrep
   :ensure t
   :bind (("<f5>" . deadgrep)))
@@ -205,6 +213,7 @@
  'org-babel-load-languages
  '((sql . t)
    (emacs-lisp . t)
+   (plantuml . t)
    (python . t)))
 
 (use-package ox-reveal
@@ -326,7 +335,7 @@
  '(clojure-indent-style :always-indent)
  '(package-selected-packages
    (quote
-    (groovy-mode jenkins all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
+    (groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
