@@ -305,7 +305,7 @@
 (use-package neotree
   :ensure t
   :commands (neotree-toggle)
-  :bind (("M-n" . neotree-toggle))
+  :bind (("s-n" . neotree-toggle))
 )
 
 (use-package yaml-mode
