@@ -212,6 +212,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
+   (lisp . t)
    (emacs-lisp . t)
    (plantuml . t)
    (python . t)))
