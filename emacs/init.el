@@ -272,7 +272,12 @@
 
 ;; org mode
 (use-package org
-  :ensure t)
+  :ensure t
+  :config
+  (progn
+   (define-key global-map "\C-cl" 'org-store-link)
+   (define-key global-map "\C-ca" 'org-agenda)
+   (setq org-log-done t)))
 
 (use-package ox-reveal
   :ensure t
@@ -286,6 +291,10 @@
 (use-package org-bullets
   :ensure t
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
+
+(setq org-agenda-files (list "~/org/work.org"
+                             "~/org/agenda.org"
+                             "~/org/home.org"))
 
 ; redifine some modeline
 (defmacro rename-modeline (package-name mode new-name)
