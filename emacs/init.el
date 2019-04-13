@@ -44,7 +44,11 @@
 (use-package dashboard
   :ensure t
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((projects  . 10)
+                        (recents . 5)
+                        (bookmarks . 5)
+                        (agenda . 5))))
 
 (use-package deadgrep
   :ensure t
