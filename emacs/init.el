@@ -279,10 +279,10 @@
 (use-package org
   :ensure t
   :config
-  (progn
-   (define-key global-map "\C-cl" 'org-store-link)
-   (define-key global-map "\C-ca" 'org-agenda)
-   (setq org-log-done t)))
+  (setf org-src-fontify-natively t)
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (setq org-log-done t))
 
 (use-package ox-reveal
   :ensure t
