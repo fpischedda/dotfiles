@@ -179,6 +179,9 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 # network manager
 exec --no-startup-id nm-applet
 
+# udiskie media automount daemon
+exec udiskie --no-notify --tray --use-udisks2
+
 # flameshot screenshot utility
 exec --no-startup-id flameshot
 bindsym --release Print exec "scrot -m '/home/user/Pictures/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png'"
