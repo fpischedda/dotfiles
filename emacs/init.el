@@ -29,6 +29,9 @@
 (eval-when-compile
   (require 'use-package))
 
+;; custom font
+(set-frame-font "Hack-12" nil t)
+
 (use-package exec-path-from-shell
   :ensure t
   :config (when (memq window-system '(mac ns x))
