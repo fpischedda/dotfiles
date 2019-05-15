@@ -257,7 +257,7 @@
   (setq cider-repl-wrap-history t)
   )
 
-;; Use clojure mode for other extensions
+;; Use clojure mode for other file extensions
 (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
@@ -267,6 +267,15 @@
 ;; A little more syntax highlighting
 (use-package clojure-mode-extra-font-locking
   :ensure t)
+
+;; Clojure refactoring module
+(use-package clj-refactor
+  :ensure t
+  :config
+  (clj-refactor-mode 1)
+  (yas-minor-mode 1) ; for adding require/use/import statements
+  (cljr-add-keybindings-with-prefix "C-c C-m")
+  )
 
 ;; Elixir related pachages
 (use-package elixir-mode
@@ -352,8 +361,7 @@
  ;; If there is more than one, they won't work right.
  '(clojure-indent-style :always-indent)
  '(package-selected-packages
-   (quote
-    (groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
+   '(w3m mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
