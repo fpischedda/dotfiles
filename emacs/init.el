@@ -67,6 +67,7 @@
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
+  (add-to-list 'evil-emacs-state-modes 'clojure-mode 'lisp-mode)
   :config (evil-mode 1)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -137,6 +138,11 @@
 (use-package magit
   :ensure t
   :config (global-set-key (kbd "C-x g") 'magit-status))
+
+(global-set-key (kbd "C->") 'paredit-forward-barf-sexp)
+(global-set-key (kbd "C-<") 'paredit-backward-barf-sexp)
+(global-set-key (kbd "C-M->") 'paredit-forward-slurp-sexp)
+(global-set-key (kbd "C-M-<") 'paredit-backward-slurp-sexp)
 
 (use-package yasnippet
   :ensure t
