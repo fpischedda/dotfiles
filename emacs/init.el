@@ -96,7 +96,8 @@
   :after evil
   :ensure t
   :config
-  (evil-collection-init '(deadgrep dired cider)))
+  (evil-collection-init '(deadgrep dired cider))
+  (evil-collection-init))
 
 (use-package restart-emacs
   :ensure t)
