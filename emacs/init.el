@@ -221,6 +221,8 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
+  (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
+  (setq projectile-globally-ignored-directories '(".git" ".projectile"))
   (projectile-mode +1))
 
 (use-package slime
