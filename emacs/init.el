@@ -14,16 +14,6 @@
 (global-display-line-numbers-mode)
 (setq column-number-mode t)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(clojure-indent-style :always-indent)
- '(initial-frame-alist '((fullscreen . maximized)))
- '(package-selected-packages
-   '(restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
-
 (show-paren-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -87,11 +77,7 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
   :config (evil-mode 1)
-  (add-to-list 'evil-emacs-state-modes 'clojure-mode 'lisp-mode)
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
+  (add-to-list 'evil-emacs-state-modes 'clojure-mode 'lisp-mode 'nav-mode))
 
 (use-package evil-nerd-commenter
   :ensure t
@@ -105,7 +91,6 @@
   :after evil
   :ensure t
   :config
-  (evil-collection-init '(deadgrep dired cider))
   (evil-collection-init))
 
 (use-package restart-emacs
@@ -363,12 +348,6 @@
 (setq python-shell-interpreter "ipython"
   python-shell-interpreter-args "--simple-prompt")
 
-(use-package neotree
-  :ensure t
-  :commands (neotree-toggle)
-  :bind (("s-n" . neotree-toggle))
-)
-
 (use-package yaml-mode
   :ensure t)
 
@@ -400,3 +379,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(clojure-indent-style :always-indent)
+ '(initial-frame-alist '((fullscreen . maximized)))
+ '(package-selected-packages
+   '(discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
