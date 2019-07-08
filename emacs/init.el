@@ -77,14 +77,16 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
   :config (evil-mode 1)
-  (add-to-list 'evil-emacs-state-modes 'clojure-mode 'lisp-mode 'nav-mode))
+  (add-to-list 'evil-emacs-state-modes 'clojure-mode 'lisp-mode))
 
 (use-package evil-nerd-commenter
   :ensure t
+  :after evil
   :config (evilnc-default-hotkeys))
 
 (use-package evil-surround
   :ensure t
+  :after evil
   :config (global-evil-surround-mode 1))
 
 (use-package evil-collection
@@ -262,9 +264,6 @@
   :config (paredit-mode))
 
 (use-package cider
-  :ensure t)
-
-(use-package clojure-mode
   :ensure t
   :init
 ;; go right to the REPL buffer when it's finished connecting
@@ -276,7 +275,10 @@
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
 ;; Wrap when navigating history.
   (setq cider-repl-wrap-history t)
-  )
+  (setq cider-lein-parameters "repl :headless :host 127.0.0.1"))
+
+(use-package clojure-mode
+  :ensure t)
 
 (use-package restclient
   :ensure t
@@ -378,6 +380,15 @@
 (use-package mastodon
   :ensure t)
 
+;; Markdown mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;;; .emacs ends here
 
 (custom-set-faces
@@ -392,7 +403,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cider-lein-parameters "repl :headless :host 0.0.0.0")
  '(clojure-indent-style :always-indent)
- '(initial-frame-alist '((fullscreen . maximized)))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
-   '(flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+   (quote
+    (markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
