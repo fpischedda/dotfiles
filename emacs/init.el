@@ -180,23 +180,23 @@
    ("C-c l"   . counsel-locate))   ; search for files or else using locate
   )
 
-(use-package jedi
-  :ensure t
-  :init (setq jedi:complete-on-dot t))
+;; (use-package jedi
+;;   :ensure t
+;;   :init (setq jedi:complete-on-dot t))
 
-(use-package elpy
-  :ensure t
-  :init
-  (setq elpy-rpc-backend "jedi")
-  (setq python-check-command "flake8")
-  :bind
-  (("s-." . elpy-goto-definition)
-   ("s->" . pop-tag-mark)
-   )
-  :config
-  (elpy-enable)
-  (yas-minor-mode)
-  (jedi:setup))
+;; (use-package elpy
+;;   :ensure t
+;;   :init
+;;   (setq elpy-rpc-backend "jedi")
+;;   (setq python-check-command "flake8")
+;;   :bind
+;;   (("s-." . elpy-goto-definition)
+;;    ("s->" . pop-tag-mark)
+;;    )
+;;   :config
+;;   (elpy-enable)
+;;   (yas-minor-mode)
+;;   (jedi:setup))
 
 (use-package projectile
   :ensure t
