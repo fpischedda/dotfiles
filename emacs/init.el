@@ -62,9 +62,9 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((projects  . 10)
-                        (recents . 5)
-                        (bookmarks . 5)
-                        (agenda . 5))))
+			  (recents . 5)
+			  (bookmarks . 5)
+			  (agenda . 5))))
 
 (use-package deadgrep
   :ensure t
@@ -260,7 +260,8 @@
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
 ;; Wrap when navigating history.
   (setq cider-repl-wrap-history t)
-  (setq cider-lein-parameters "repl :headless :host 127.0.0.1"))
+  (setq cider-lein-parameters "repl :headless :host 127.0.0.1")
+  :bind (("C-." . cider-docview-source)))
 
 (use-package clojure-mode
   :ensure t)
