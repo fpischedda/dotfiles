@@ -384,6 +384,9 @@
   :ensure t
   :mode (("\\.tscn\\'" . toml-mode)))
 
+;; c/c++
+(setq c-default-style "linux"
+      c-basic-offset 4)
 ;;; .emacs ends here
 
 (custom-set-faces
