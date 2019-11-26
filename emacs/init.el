@@ -22,10 +22,6 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (package-initialize)
 
-;; This is only needed once, near the top of the file
-;; (unless (package-installed-p 'use-package)
-;;   (package-install 'use-package))
-
 (eval-when-compile
   (require 'use-package))
 
@@ -36,10 +32,6 @@
   :ensure t
   :config (when (memq window-system '(mac ns x))
 	    (exec-path-from-shell-initialize)))
-
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :init (load-theme 'zenburn t))
 
 (use-package material-theme
   :ensure t
@@ -56,15 +48,6 @@
 
 (use-package plantuml-mode
   :ensure t)
-
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '((projects  . 10)
-			  (recents . 5)
-			  (bookmarks . 5)
-			  (agenda . 5))))
 
 (use-package deadgrep
   :ensure t
@@ -106,10 +89,6 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package wakatime-mode
-  :ensure t
-  :init (global-wakatime-mode))
-
 (use-package smartparens
   :ensure t
   :diminish smartparens-mode
@@ -143,11 +122,6 @@
   :ensure t
   :init
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
-
-;; powerline - now disabled while testing doom-modeline
-;; (use-package powerline
-;;   :ensure t
-;;   :config (powerline-default-theme))
 
 (use-package all-the-icons
   :ensure t)
@@ -183,24 +157,6 @@
    ("C-c /"   . counsel-ag)        ; search for regexp in git repo using ag
    ("C-c l"   . counsel-locate))   ; search for files or else using locate
   )
-
-;; (use-package jedi
-;;   :ensure t
-;;   :init (setq jedi:complete-on-dot t))
-
-;; (use-package elpy
-;;   :ensure t
-;;   :init
-;;   (setq elpy-rpc-backend "jedi")
-;;   (setq python-check-command "flake8")
-;;   :bind
-;;   (("s-." . elpy-goto-definition)
-;;    ("s->" . pop-tag-mark)
-;;    )
-;;   :config
-;;   (elpy-enable)
-;;   (yas-minor-mode)
-;;   (jedi:setup))
 
 (use-package projectile
   :ensure t
@@ -404,11 +360,13 @@
  '(cider-lein-parameters "repl :headless :host 0.0.0.0")
  '(clojure-indent-style :always-indent)
  '(custom-safe-themes
-   '("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default))
+   (quote
+    ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default)))
  '(dired-listing-switches "-aBhl --group-directories-first")
- '(initial-frame-alist '((fullscreen . maximized)))
- '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(org-agenda-files (quote ("~/org/agenda.org" "~/org/home.org")))
  '(package-selected-packages
-   '(flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))
+   (quote
+    (use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin nil))
