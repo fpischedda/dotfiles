@@ -41,6 +41,10 @@ Plug 'tpope/vim-fugitive'
 
 " Better repeat handling, especially for plugins
 Plug 'tpope/vim-repeat'
+
+" Modern c++ syntax highlight
+Plug 'bfrg/vim-cpp-modern'
+
 " Initialize plugin system.
 call plug#end()
 
@@ -83,3 +87,7 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
 endif
+
+" Enable per project settings
+set exrc
+set secure
