@@ -42,8 +42,13 @@ Plug 'tpope/vim-fugitive'
 " Better repeat handling, especially for plugins
 Plug 'tpope/vim-repeat'
 
+Plug 'tpope/vim-surround'
+
 " Modern c++ syntax highlight
 Plug 'bfrg/vim-cpp-modern'
+
+" CMake support
+Plug 'vhdirk/vim-cmake'
 
 " Initialize plugin system.
 call plug#end()
