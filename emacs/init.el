@@ -34,8 +34,16 @@
 	    (exec-path-from-shell-initialize)))
 
 (use-package material-theme
-  :ensure t
-  :init (load-theme 'material t))
+  :ensure t)
+
+(use-package nord-theme
+  :ensure t)
+
+(use-package monochrome-theme
+  :ensure t)
+
+;; load selected theme
+(load-theme 'monochrome t)
 
 (use-package dired
   :ensure nil
@@ -369,12 +377,12 @@
  '(clojure-indent-style :always-indent)
  '(custom-safe-themes
    (quote
-    ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default)))
+    ("39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default)))
  '(dired-listing-switches "-aBhl --group-directories-first")
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(org-agenda-files (quote ("~/org/agenda.org" "~/org/home.org")))
  '(package-selected-packages
    (quote
-    (phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+    (monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin nil))
