@@ -54,6 +54,49 @@
   :custom
   (dired-listing-switches "-aBhl --group-directories-first"))
 
+(use-package restart-emacs
+  :ensure t)
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
+;; run multi-term pressing F1
+(global-set-key [f1] 'term)
+
+(use-package smartparens
+  :ensure t
+  :diminish smartparens-mode
+  :config
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode 1)))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :defer t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package paredit
+  :ensure t
+  :config (paredit-mode))
+
+(use-package ranger :ensure t
+  :commands (ranger)
+  :bind (("C-x d" . deer))
+  :config
+  (setq ranger-cleanup-eagerly t)
+  )
+
+(use-package magit
+  :ensure t
+  :config (global-set-key (kbd "C-x g") 'magit-status))
+
+(global-set-key (kbd "C->") 'paredit-forward-barf-sexp)
+(global-set-key (kbd "C-<") 'paredit-backward-barf-sexp)
+(global-set-key (kbd "C-M->") 'paredit-forward-slurp-sexp)
+(global-set-key (kbd "C-M-<") 'paredit-backward-slurp-sexp)
+
 (use-package plantuml-mode
   :ensure t)
 
@@ -89,42 +132,6 @@
   :ensure t
   :config
   (evil-collection-init))
-
-(use-package restart-emacs
-  :ensure t)
-
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
-(use-package smartparens
-  :ensure t
-  :diminish smartparens-mode
-  :config
-  (progn
-    (require 'smartparens-config)
-    (smartparens-global-mode 1)))
-
-(use-package rainbow-delimiters
-  :ensure t
-  :defer t
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package ranger :ensure t
-  :commands (ranger)
-  :bind (("C-x d" . deer))
-  :config
-  (setq ranger-cleanup-eagerly t)
-  )
-
-(use-package magit
-  :ensure t
-  :config (global-set-key (kbd "C-x g") 'magit-status))
-
-(global-set-key (kbd "C->") 'paredit-forward-barf-sexp)
-(global-set-key (kbd "C-<") 'paredit-backward-barf-sexp)
-(global-set-key (kbd "C-M->") 'paredit-forward-slurp-sexp)
-(global-set-key (kbd "C-M-<") 'paredit-backward-slurp-sexp)
 
 (use-package yasnippet
   :ensure t
@@ -180,37 +187,20 @@
 (use-package flx-ido
   :ensure t)
 
+(use-package company
+  :config
+  (setq company-idle-delay 0.3)
+
+  (global-company-mode 1)
+
+  (global-set-key (kbd "C-<tab>") 'company-complete))
+
 (use-package slime
   :ensure t
   :init
   (setq inferior-lisp-program "sbcl")
   :config
   (slime-mode t))
-
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sql . t)
-   (lisp . t)
-   (emacs-lisp . t)
-   (plantuml . t)
-   (python . t)))
-
-(use-package ox-reveal
-  :ensure t
-  :init
-  (setq org-reveal-root "file:///Users/francescopischedda/reveal.js/"))
-
-;; run multi-term pressing F1
-(global-set-key [f1] 'term)
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config (rainbow-delimiters-mode))
-
-(use-package paredit
-  :ensure t
-  :config (paredit-mode))
 
 (use-package cider
   :ensure t
@@ -273,6 +263,15 @@
   (define-key global-map "\C-ca" 'org-agenda)
   (setq org-log-done t))
 
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t)
+   (lisp . t)
+   (emacs-lisp . t)
+   (plantuml . t)
+   (python . t)))
+
 (use-package ox-reveal
   :ensure t
   :init (setq org-reveal-root "file:///~/reveal.js"))
@@ -319,15 +318,6 @@
 (use-package docker-compose-mode
   :ensure t)
 
-;; setup gopher.el
-(add-to-list 'load-path "~/gopher.el/")
-(load "gopher")
-(add-to-list 'evil-emacs-state-modes 'gopher-mode)
-
-;; Mastodon.el
-(use-package mastodon
-  :ensure t)
-
 ;; Markdown mode
 (use-package markdown-mode
   :ensure t
@@ -352,12 +342,36 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 
-(use-package lsp-mode :commands lsp :ensure t)
-(use-package lsp-ui :commands lsp-ui-mode :ensure t)
-(use-package company-lsp
+(add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+(add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+
+(use-package rtags
   :ensure t
-  :commands company-lsp
-  :config (push 'company-lsp company-backends)) ;; add company-lsp as a backend
+  :hook (c++-mode . rtags-start-process-unless-running)
+  :config (setq rtags-completions-enabled t
+		rtags-path "~/.emacs.d/rtags/src/rtags.el"
+		rtags-rc-binary-name "~/bin/rc"
+		;; rtags-use-helm t
+		rtags-use-company t
+		rtags-rdm-binary-name "~/bin/rdm")
+  :bind (("C-c E" . rtags-find-symbol)
+  	 ("C-c e" . rtags-find-symbol-at-point)
+  	 ("C-c O" . rtags-find-references)
+  	 ("C-c o" . rtags-find-references-at-point)
+  	 ("C-c s" . rtags-find-file)
+  	 ("C-c v" . rtags-find-virtuals-at-point)
+  	 ("C-c F" . rtags-fixit)
+  	 ("C-c f" . rtags-location-stack-forward)
+  	 ("C-c b" . rtags-location-stack-back)
+  	 ("C-c n" . rtags-next-match)
+  	 ("C-c p" . rtags-previous-match)
+  	 ("C-c P" . rtags-preprocess-file)
+  	 ("C-c R" . rtags-rename-symbol)
+  	 ("C-c x" . rtags-show-rtags-buffer)
+  	 ("C-c T" . rtags-print-symbol-info)
+  	 ("C-c t" . rtags-symbol-type)
+  	 ("C-c I" . rtags-include-file)
+  	 ("C-c i" . rtags-get-include-file-for-symbol)))
 
 ;;; .emacs ends here
 
@@ -366,7 +380,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 10)) (:foreground "light gray" :background "black")))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -383,6 +397,6 @@
  '(org-agenda-files (quote ("~/org/agenda.org" "~/org/home.org")))
  '(package-selected-packages
    (quote
-    (monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+    (ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin nil))
