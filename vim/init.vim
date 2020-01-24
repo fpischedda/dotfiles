@@ -24,7 +24,7 @@ Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+Plug 'natebosch/vim-lsc'
 
 " FZF integration
 Plug '/usr/fzf'
@@ -61,9 +61,30 @@ let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#max_height = 40
 
+" c/c++ language server setup with ccls, start -->
+" Register ccls C++ lanuage server.
+let g:lsc_server_commands = {
+\ 'cpp': {
+\    'command': 'ccls',
+\    'message_hooks': {
+\        'initialize': {
+\            'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
+\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
+\        },
+\    },
+\  },
+\}
+
+let g:lsc_auto_map = {
+\  'GoToDefinition': '<M-d>',
+\  'FindReferences': '<M-r>',
+\}
+" <-- end, c/c++ language server setup with ccls
+
 " For ALE, linters for clojure
 let g:ale_linters = {
-      \ 'clojure': ['clj-kondo', 'joker']
+      \ 'clojure': ['clj-kondo', 'joker'],
+      \ 'cpp': ['ccls']
       \}
 
 " Vim Clap
