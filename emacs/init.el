@@ -195,6 +195,26 @@
 
   (global-set-key (kbd "C-<tab>") 'company-complete))
 
+(use-package flycheck
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'flycheck-mode)
+    :config
+    (setq-default
+     flycheck-display-errors-delay        0.3
+     flycheck-check-syntax-automatically  '(mode-enabled save)
+     flycheck-indication-mode             'right-fringe
+     )
+    (setq-default flycheck-gcc-language-standard "c++17")
+    (setq-default flycheck-clang-language-standard "c++17")
+    )
+
+(use-package restclient
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.rest$" . restclient-mode))
+  (add-to-list 'auto-mode-alist '("\\.rest-client$" . restclient-mode)))
+
 (use-package slime
   :ensure t
   :init
@@ -219,12 +239,6 @@
 
 (use-package clojure-mode
   :ensure t)
-
-(use-package restclient
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.rest$" . restclient-mode))
-  (add-to-list 'auto-mode-alist '("\\.rest-client$" . restclient-mode)))
 
 ;; Use clojure mode for other file extensions
 (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
@@ -351,7 +365,6 @@
   :config (setq rtags-completions-enabled t
 		rtags-path "~/.emacs.d/rtags/src/rtags.el"
 		rtags-rc-binary-name "~/bin/rc"
-		;; rtags-use-helm t
 		rtags-use-company t
 		rtags-rdm-binary-name "~/bin/rdm")
   :bind (("C-c E" . rtags-find-symbol)
@@ -372,6 +385,31 @@
   	 ("C-c t" . rtags-symbol-type)
   	 ("C-c I" . rtags-include-file)
   	 ("C-c i" . rtags-get-include-file-for-symbol)))
+
+(use-package flycheck-rtags
+    :ensure t
+    :after flycheck rtags
+    :config
+    (defun my-flycheck-rtags-setup ()
+      (flycheck-select-checker 'rtags)
+      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+      (setq-local flycheck-check-syntax-automatically nil)
+      )
+    (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+    (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+    (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
+    )
+
+(use-package ivy-rtags
+  :ensure t
+  :config
+  (setq rtags-display-result-backend 'ivy))
+
+(use-package company-rtags
+  :ensure t
+  :config (push 'company-rtags company-backends))
+
+
 
 ;;; .emacs ends here
 
@@ -397,6 +435,6 @@
  '(org-agenda-files (quote ("~/org/agenda.org" "~/org/home.org")))
  '(package-selected-packages
    (quote
-    (ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+    (ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin nil))
