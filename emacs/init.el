@@ -286,6 +286,10 @@
    (plantuml . t)
    (python . t)))
 
+;; used to render code snippets when exporting org files
+(use-package htmlize
+  :ensure t)
+
 (use-package ox-reveal
   :ensure t
   :init (setq org-reveal-root "file:///~/reveal.js"))
@@ -447,6 +451,6 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+    (htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin nil))
