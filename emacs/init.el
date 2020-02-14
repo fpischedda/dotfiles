@@ -4,6 +4,23 @@
 (require 'package)
 
 ;;; Code:
+
+;; next two forms should speed up startup time according to this post
+;; https://www.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn_fast/fhicvbj?utm_source=share&utm_medium=web2x
+(setq frame-inhibit-implied-resize t)
+(setq initial-major-mode 'fundamental-mode)
+
+;; these are take from the following article about how doom emacs optimizes startup time
+;; https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#how-does-doom-start-up-so-quickly
+(defvar doom-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
+      gc-cons-percentage 0.6) ;; this will be reset at the end of the config
+
+(defvar doom--file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+;; <-- end of startup time "optimizations"
+
 (setq inhibit-startup-message t)
 (setq inhibit-splash-screen t)
 (setq make-backup-files nil)
@@ -434,6 +451,26 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((class color) (min-colors 10)) (:foreground "light gray" :background "black")))))
+
+;;set GC to "sane" default again, it has been disabled to make startup faster
+(add-hook 'emacs-startup-hook
+  (lambda ()
+    (setq gc-cons-threshold 16777216 ; 16mb
+          gc-cons-percentage 0.1)
+    (setq file-name-handler-alist doom--file-name-handler-alist)))
+
+;; minibuffer related optimizations take from doom emacs
+(defun doom-defer-garbage-collection-h ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun doom-restore-garbage-collection-h ()
+  "Defer it so that commands launched immediately after will enjoy the
+   benefits"
+  (run-at-time
+   1 nil (lambda () (setq gc-cons-threshold doom-gc-cons-threshold))))
+
+(add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
+(add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
