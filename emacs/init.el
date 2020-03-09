@@ -331,7 +331,7 @@
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "WIP(w)" "|" "DONE(d)")
         (sequence "REPORT(R)" "BUG(B)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-        (sequence "|" "BLOCKED(c)")
+        (sequence "|" "BLOCKED(b)")
         (sequence "|" "RECURRING(r)")
         (sequence "|" "CANCELED(c)")))
 
