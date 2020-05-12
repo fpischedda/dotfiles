@@ -11,13 +11,13 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim'
-Plug 'ncm2/float-preview.nvim'
+" Plug 'ncm2/float-preview.nvim'
 
 " Async Lint Engine
 Plug 'w0rp/ale'
 
 " Finding files
-Plug 'liuchengxu/vim-clap'
+" Plug 'liuchengxu/vim-clap'
 
 " Conjure, plugin for Clojure/ClojureScript
 Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
@@ -48,7 +48,10 @@ Plug 'tpope/vim-surround'
 Plug 'bfrg/vim-cpp-modern'
 
 " CMake support
-Plug 'vhdirk/vim-cmake'
+" Plug 'vhdirk/vim-cmake'
+
+" Elixir
+Plug 'slashmili/alchemist.vim'
 
 " Initialize plugin system.
 call plug#end()
