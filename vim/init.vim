@@ -11,13 +11,13 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim'
-Plug 'ncm2/float-preview.nvim'
+" Plug 'ncm2/float-preview.nvim'
 
 " Async Lint Engine
 Plug 'w0rp/ale'
 
 " Finding files
-Plug 'liuchengxu/vim-clap'
+" Plug 'liuchengxu/vim-clap'
 
 " Conjure, plugin for Clojure/ClojureScript
 Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
@@ -83,7 +83,7 @@ let g:lsc_auto_map = {
 
 " For ALE, linters for clojure
 let g:ale_linters = {
-      \ 'clojure': ['clj-kondo', 'joker'],
+      \ 'clojure': ['clj-kondo'],
       \ 'cpp': ['ccls']
       \}
 
