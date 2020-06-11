@@ -86,7 +86,7 @@ let g:lsc_auto_map = {
 
 " For ALE, linters for clojure
 let g:ale_linters = {
-      \ 'clojure': ['clj-kondo', 'joker'],
+      \ 'clojure': ['clj-kondo'],
       \ 'cpp': ['ccls']
       \}
 
