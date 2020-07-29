@@ -354,6 +354,7 @@
         (setq mode-name ,new-name))))
 
 (rename-modeline "js2-mode" js2-mode "JS2")
+(setq js-indent-level 2)
 (rename-modeline "clojure-mode" clojure-mode "Clj")
 (rename-modeline "python-mode" python-mode "Py")
 
