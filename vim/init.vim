@@ -19,12 +19,14 @@ Plug 'w0rp/ale'
 " Finding files
 " Plug 'liuchengxu/vim-clap'
 
-" Conjure, plugin for Clojure/ClojureScript
-Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
+" Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
+Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
@@ -49,6 +51,15 @@ Plug 'bfrg/vim-cpp-modern'
 
 " CMake support
 Plug 'vhdirk/vim-cmake'
+
+" Test runner
+Plug 'vim-test/vim-test'
+
+" Terminal
+Plug 'kassio/neoterm'
+
+" Fennel (Lisp for LUA)
+Plug 'bakpakin/fennel.vim'
 
 " Initialize plugin system.
 call plug#end()
@@ -81,10 +92,11 @@ let g:lsc_auto_map = {
 \}
 " <-- end, c/c++ language server setup with ccls
 
-" For ALE, linters for clojure
+" For ALE, linters for clojure, cpp, elixir
 let g:ale_linters = {
       \ 'clojure': ['clj-kondo'],
-      \ 'cpp': ['ccls']
+      \ 'cpp': ['ccls'],
+      \ 'elixir': ['mix_format']
       \}
 
 " Vim Clap
@@ -114,6 +126,19 @@ if executable('pyls')
         \ })
 endif
 
+" COC related settings
+" see here for more:
+" https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt#L912
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+" shows code outline
+nnoremap <silent> <leader>co  :<C-u>CocList outline<CR>
+
+" Test runner settings
+let test#strategy = "neoterm"
+
 " Enable per project settings
 set exrc
 set secure
+
+let maplocalleader = ","
