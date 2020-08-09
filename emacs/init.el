@@ -59,8 +59,12 @@
 (use-package monochrome-theme
   :ensure t)
 
+(use-package acme-theme
+  :ensure t)
+
 ;; load selected theme
-(load-theme 'monochrome t)
+;; (load-theme 'monochrome t)
+(load-theme 'modus-operandi t)
 
 (use-package dired
   :ensure nil
@@ -199,7 +203,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
-  (setq projectile-globally-ignored-directories '(".git" ".projectile" "build" ".clj-kondo"))
+  (setq projectile-globally-ignored-directories '(".git" ".projectile" "build" "env" "env2" ".shadow-cljs"))
   (setq projectile-sort-order 'modification-time)
   (setq projectile-project-search-path '("~/work/"))
   (projectile-mode +1))
@@ -284,12 +288,12 @@
   (cljr-add-keybindings-with-prefix "C-c C-m")
   )
 
-;; Elixir related pachages
-(use-package elixir-mode
-  :ensure t)
+;; Elixir related pachages - temporarily disabled
+;; (use-package elixir-mode
+;;   :ensure t)
 
-(use-package alchemist
-  :ensure t)
+;; (use-package alchemist
+;;   :ensure t)
 
 ;; temporarily disabled
 ;; (use-package flycheck-mix
@@ -359,6 +363,8 @@
 
 (rename-modeline "js2-mode" js2-mode "JS2")
 (setq js-indent-level 2)
+(setq css-indent-offset 2)
+
 (rename-modeline "clojure-mode" clojure-mode "Clj")
 (rename-modeline "python-mode" python-mode "Py")
 
@@ -479,6 +485,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ ;; '(default ((t (:foreground "#444444" :background "#FFFFE8"))))
  )
 
 ;;set GC to "sane" default again, it has been disabled to make startup faster
@@ -508,11 +515,13 @@
  '(cider-lein-parameters "repl :headless :host 0.0.0.0")
  '(clojure-indent-style :always-indent)
  '(custom-safe-themes
-   '("39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default))
+   (quote
+    ("6339e18e32734507d5b70817fbd490cdf1761826d7445153215ad7ee63ee3931" "afd761c9b0f52ac19764b99d7a4d871fc329f7392dfc6cd29710e8209c691477" "befd48e22121985f7bdbb188704bd3fdb12697d5031c0f0c4d4cb34f8fa3024c" "248bdabe33857dd0f9700a4630526f5a0f4867afab418188f8f2eaca73dfc6c8" "18cc5dd284685a224ab24873911cfb467a06c1fe45b121c8aa073920179ce070" "aec089c0a0e043589bf8d9d99fe2e330073a3a1e75c7eb51262835d6046a9e22" "41fa754692f20e6ed36b6038f710ff56c247f05de6edb6d5680215ffabfb88a2" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default)))
  '(dired-listing-switches "-aBhl --group-directories-first")
  '(initial-frame-alist '((fullscreen . maximized)))
  '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(mode-icons lps-ui org-roam evil-mu4e chess geiser htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+   (quote
+    (acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
  ;;; init.el ends here
