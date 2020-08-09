@@ -26,21 +26,14 @@ Plug 'w0rp/ale'
 " Finding files
 " Plug 'liuchengxu/vim-clap'
 
-" vim-iced, plugin for Clojure
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'liquidz/vim-iced', {'for': 'clojure'}
-Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
-
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
-" Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
-" Plug 'tpope/vim-dispatch'
-" Plug 'clojure-vim/vim-jack-in'
-" Plug 'radenling/vim-dispatch-neovim'
+Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
@@ -180,9 +173,13 @@ let test#strategy = "neoterm"
 set exrc
 set secure
 
+<<<<<<< HEAD
 " run black infile save
 autocmd BufWritePre *.py execute ':Black'
 let maplocalleader = ","
 
 " Tell vim-iced to use <LocalLeader>
 let g:iced_enable_default_key_mappings = v:true
+=======
+let maplocalleader = ","
+>>>>>>> a0405be (add clojure support with conjure, trying elixir support)
