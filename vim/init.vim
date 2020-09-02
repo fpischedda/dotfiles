@@ -7,6 +7,8 @@ Plug 'liuchengxu/vim-better-default'
 
 Plug 'easymotion/vim-easymotion'
 
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'luochen1990/rainbow'
 
@@ -28,6 +30,9 @@ Plug 'w0rp/ale'
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
 Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
+Plug 'tpope/vim-dispatch'
+Plug 'clojure-vim/vim-jack-in'
+Plug 'radenling/vim-dispatch-neovim'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
