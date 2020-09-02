@@ -43,7 +43,7 @@
   (require 'use-package))
 
 ;; custom font
-(set-frame-font "Hack-12" nil t)
+(set-frame-font "Hack-13" nil t)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -465,6 +465,7 @@
   :config (push 'company-rtags company-backends))
 
 
+<<<<<<< HEAD
 ;; scheme
 (use-package geiser
   :ensure t)
@@ -487,6 +488,8 @@
  ;; If there is more than one, they won't work right.
  ;; '(default ((t (:foreground "#444444" :background "#FFFFE8"))))
  )
+
+;;; .emacs ends here
 
 ;;set GC to "sane" default again, it has been disabled to make startup faster
 (add-hook 'emacs-startup-hook

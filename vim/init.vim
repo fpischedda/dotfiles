@@ -173,13 +173,6 @@ let test#strategy = "neoterm"
 set exrc
 set secure
 
-<<<<<<< HEAD
 " run black infile save
 autocmd BufWritePre *.py execute ':Black'
 let maplocalleader = ","
-
-" Tell vim-iced to use <LocalLeader>
-let g:iced_enable_default_key_mappings = v:true
-=======
-let maplocalleader = ","
->>>>>>> a0405be (add clojure support with conjure, trying elixir support)
