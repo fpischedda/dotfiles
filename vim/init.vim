@@ -2,12 +2,21 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 " Specify your required plugins here.
+
 Plug 'liuchengxu/vim-better-default'
 
 Plug 'easymotion/vim-easymotion'
 
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'axelf4/vim-strip-trailing-whitespace'
+Plug 'luochen1990/rainbow'
+
+" Frontend to ripgrep
+Plug 'mileszs/ack.vim'
+
+" Fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim'
@@ -21,6 +30,9 @@ Plug 'w0rp/ale'
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
 Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
+Plug 'tpope/vim-dispatch'
+Plug 'clojure-vim/vim-jack-in'
+Plug 'radenling/vim-dispatch-neovim'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
@@ -61,8 +73,30 @@ Plug 'kassio/neoterm'
 " Fennel (Lisp for LUA)
 Plug 'bakpakin/fennel.vim'
 
+" Themes
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
+
 " Initialize plugin system.
 call plug#end()
+
+" colorscheme PaperColor
+" colorscheme gruvbox
+colorscheme apprentice
+
+" Activate rainbow parens
+let g:rainbow_active = 1
+
+" ctrlp customization
+let g:ctrlp_root_markers = ['deps.edn']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" ack.vim customization to use ripgrep
+let g:ackprg = 'rg --vimgrep'
+let g:ack_autoclose = 1
+cnoreabbrev Ack Ack!
 
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
