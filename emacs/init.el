@@ -353,6 +353,12 @@
         (sequence "|" "RECURRING(r)")
         (sequence "|" "CANCELED(c)")))
 
+;; trying org-roam
+(use-package org-roam
+  :ensure t
+  :init (add-hook 'after-init-hook 'org-roam-mode)
+  :config (setq org-roam-directory "~/org"))
+
 ; redifine some modeline
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
