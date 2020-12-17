@@ -199,7 +199,7 @@
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
   (setq projectile-globally-ignored-directories '(".git" ".projectile" "build"))
   (setq projectile-sort-order 'modification-time)
-  (setq projectile-project-search-path '("~/work/"))
+  (setq projectile-project-search-path '("~/work/" "~/quicklisp/local-projects"))
   (projectile-mode +1))
 
 (use-package flx-ido
