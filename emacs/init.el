@@ -448,6 +448,46 @@
   :config (push 'company-rtags company-backends))
 
 
+;; scheme
+(use-package geiser
+  :ensure t)
+
+;; indentation for js set to two spaces
+(setq js2-indent-level 2)
+(setq-default js2-basic-offset 2)
+
+;; epub reader
+;; (use-package nov
+;;   :ensure t
+;;   :config (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+
+;; make sure mu4e is in your load-path
+(require 'mu4e)
+
+;; use mu4e for e-mail in emacs
+(setq mail-user-agent 'mu4e-user-agent)
+
+;; If you get your mail without an explicit command,
+;; use "true" for the command (this is the default)
+(setq mu4e-get-mail-command "mbsync -a")
+
+;; these must start with a "/", and must exist
+;; (i.e.. /home/user/Maildir/sent must exist)
+;; you use e.g. 'mu mkdir' to make the Maildirs if they don't
+;; already exist
+
+;; below are the defaults; if they do not exist yet, mu4e offers to
+;; create them. they can also functions; see their docstrings.
+(setq mu4e-sent-folder   "/sent")
+(setq mu4e-drafts-folder "/drafts")
+(setq mu4e-trash-folder  "/trash")
+
+;; smtp mail setting; these are the same that `gnus' uses.
+;; (setq
+;;    message-send-mail-function   'smtpmail-send-it
+;;    smtpmail-default-smtp-server "smtp.example.com"
+;;    smtpmail-smtp-server         "smtp.example.com"
+;;    smtpmail-local-domain        "example.com")
 
 ;;; .emacs ends here
 
