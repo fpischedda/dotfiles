@@ -72,8 +72,7 @@
   :ensure t)
 
 ;; load selected theme
-;; (load-theme 'monochrome t)
-(load-theme 'modus-operandi t)
+(load-theme 'modus-vivendi t)
 
 (use-package dired
   :ensure nil
