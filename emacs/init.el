@@ -108,7 +108,12 @@
 
 (use-package paredit
   :ensure t
-  :config (paredit-mode))
+  :config
+  (paredit-mode)
+  (global-set-key (kbd "C->")   'paredit-forward-barf-sexp)
+  (global-set-key (kbd "C-<")   'paredit-backward-barf-sexp)
+  (global-set-key (kbd "C-M->") 'paredit-forward-slurp-sexp)
+  (global-set-key (kbd "C-M-<") 'paredit-backward-slurp-sexp))
 
 (use-package ranger :ensure t
   :commands (ranger)
@@ -121,10 +126,6 @@
   :ensure t
   :config (global-set-key (kbd "C-x g") 'magit-status))
 
-(global-set-key (kbd "C->") 'paredit-forward-barf-sexp)
-(global-set-key (kbd "C-<") 'paredit-backward-barf-sexp)
-(global-set-key (kbd "C-M->") 'paredit-forward-slurp-sexp)
-(global-set-key (kbd "C-M-<") 'paredit-backward-slurp-sexp)
 
 (use-package plantuml-mode
   :ensure t)
