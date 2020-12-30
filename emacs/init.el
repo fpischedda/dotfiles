@@ -479,8 +479,6 @@
   :ensure t
   :config (push 'company-rtags company-backends))
 
-
-<<<<<<< HEAD
 ;; scheme
 (use-package geiser
   :ensure t)
