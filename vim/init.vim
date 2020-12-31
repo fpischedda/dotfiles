@@ -37,8 +37,8 @@ Plug 'radenling/vim-dispatch-neovim'
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
