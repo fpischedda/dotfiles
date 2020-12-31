@@ -37,8 +37,8 @@ Plug 'radenling/vim-dispatch-neovim'
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
@@ -72,6 +72,9 @@ Plug 'kassio/neoterm'
 
 " Fennel (Lisp for LUA)
 Plug 'bakpakin/fennel.vim'
+
+" Python black
+Plug 'psf/black', { 'branch': 'stable' }
 
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
@@ -175,4 +178,6 @@ let test#strategy = "neoterm"
 set exrc
 set secure
 
+" run black infile save
+autocmd BufWritePre *.py execute ':Black'
 let maplocalleader = ","
