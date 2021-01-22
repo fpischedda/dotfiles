@@ -480,16 +480,15 @@
 ;; (see `mu info`).
 ;; instead of strings, they can be functions too, see
 ;; their docstring or the chapter 'Dynamic folders'
-(setq mu4e-sent-folder   "/sent"
-      mu4e-drafts-folder "/drafts"
-      mu4e-trash-folder  "/trash")
+(setq mu4e-sent-folder   "/Sent"
+      mu4e-drafts-folder "/Drafts"
+      mu4e-trash-folder  "/Trash")
 
 ;; the maildirs you use frequently; access them with 'j' ('jump')
 (setq   mu4e-maildir-shortcuts
-    '((:maildir "/archive" :key ?a)
-      (:maildir "/inbox"   :key ?i)
-      (:maildir "/work"    :key ?w)
-      (:maildir "/sent"    :key ?s)))
+    '((:maildir "/gmail/inbox" :key ?g)
+      (:maildir "/yahoo/inbox"   :key ?y)
+      (:maildir "/yandex/inbox"    :key ?x)))
 
 ;; the headers to show in the headers list -- a pair of a field
 ;; and its width, with `nil' meaning 'unlimited'
@@ -520,11 +519,11 @@
 
 ;; smtp mail setting
 ;; MAYBE LATER
-;; (setq
-;;    message-send-mail-function 'smtpmail-send-it
-;;    smtpmail-default-smtp-server "smtp.example.com"
-;;    smtpmail-smtp-server "smtp.example.com"
-;;    smtpmail-local-domain "example.com"
+(setq sendmail-program "/usr/bin/msmtp"
+      message-sendmail-f-is-evil t
+      message-sendmail-extra-arguments '("--read-envelope-from")
+      send-mail-function 'smtpmail-send-it
+      message-send-mail-function 'message-send-mail-with-sendmail)
 
 ;;    ;; if you need offline mode, set these -- and create the queue dir
 ;;    ;; with 'mu mkdir', i.e.. mu mkdir /home/user/Maildir/queue
