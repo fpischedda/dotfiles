@@ -242,9 +242,9 @@
 
 (use-package restclient
   :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.rest$" . restclient-mode))
-  (add-to-list 'auto-mode-alist '("\\.rest-client$" . restclient-mode)))
+  :mode (("\\.rest\\'" . restclient-mode)
+         ("\\.restclient\\'" . restclient-mode)
+	 ("\\.http\\'" . restclient-mode)))
 
 (use-package slime
   :ensure t
