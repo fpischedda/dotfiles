@@ -391,11 +391,6 @@
 (use-package yaml-mode
   :ensure t)
 
-(use-package ansible
-  :ensure t
-  :hook (yaml-mode . (lambda () (ansible 1)))
-  :commands (ansible))
-
 (use-package dockerfile-mode
   :ensure t)
 
