@@ -383,6 +383,18 @@
 (rename-modeline "clojure-mode" clojure-mode "Clj")
 (rename-modeline "python-mode" python-mode "Py")
 
+;; Python
+
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-python-ms)
+			 (lsp))))  ; or lsp-deferred
+
+(use-package pyvenv
+  :ensure t)
+
 ; a fix needed to run ipython4 as a shell inside emacs
 ; link: https://www.reddit.com/r/Python/comments/4w5d4e/psa_ipython_5_will_break_emacs_heres_how_to_fix_it/
 (setq python-shell-interpreter "ipython"
@@ -532,7 +544,7 @@
  '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+   '(lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  ;;; init.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
