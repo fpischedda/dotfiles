@@ -436,12 +436,11 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 
-(add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-(add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-
 (use-package rtags
   :ensure t
-  :hook (c++-mode . rtags-start-process-unless-running)
+  :hook
+  ((c++-mode . rtags-start-process-unless-running)
+   (c-mode . rtags-start-process-unless-running))
   :config (setq rtags-completions-enabled t
 		rtags-path "~/.emacs.d/rtags/src/rtags.el"
 		rtags-rc-binary-name "~/bin/rc"
