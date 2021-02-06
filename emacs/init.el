@@ -253,6 +253,10 @@
   :config
   (slime-mode t))
 
+(use-package lsp-ui
+  :ensure t)
+
+;;;; Clojure
 (use-package cider
   :ensure t
   :init
@@ -273,13 +277,18 @@
 
 (use-package clojure-mode
   :ensure t
-  :config
-  (require 'flycheck-clj-kondo))
-
+  :mode
 ;; Use clojure mode for other file extensions
-(add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-(add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-(add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode))
+  (("\\.edn$" . clojure-mode)
+   ("\\.boot$" . clojure-mode)
+   ("lein-env" . enh-ruby-mode))
+  :config
+  (require 'flycheck-clj-kondo)
+  :hook
+  ((clojure-mode . lsp)
+   (clojurescript . lsp)
+   (clojurec-mode . lsp))
+  )
 
 ;; A little more syntax highlighting
 (use-package clojure-mode-extra-font-locking
@@ -293,6 +302,10 @@
   (yas-minor-mode 1) ; for adding require/use/import statements
   (cljr-add-keybindings-with-prefix "C-c C-m")
   )
+
+;; Clojure lsp settings
+(setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
+
 
 ;; Elixir related pachages - temporarily disabled
 ;; (use-package elixir-mode
