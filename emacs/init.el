@@ -107,7 +107,9 @@
 
 (use-package magit
   :ensure t
-  :config (global-set-key (kbd "C-x g") 'magit-status))
+  :config
+  (setq magit-log-section-commit-count 20)
+  (global-set-key (kbd "C-x g") 'magit-status))
 
 (global-set-key (kbd "C->") 'paredit-forward-barf-sexp)
 (global-set-key (kbd "C-<") 'paredit-backward-barf-sexp)
@@ -199,7 +201,7 @@
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
   (setq projectile-globally-ignored-directories '(".git" ".projectile" "build"))
   (setq projectile-sort-order 'modification-time)
-  (setq projectile-project-search-path '("~/work/" "~/quicklisp/local-projects"))
+  (setq projectile-project-search-path '("~/work/"))
   (projectile-mode +1))
 
 (use-package flx-ido
@@ -215,16 +217,16 @@
 
 (use-package flycheck
     :ensure t
-    :init
-    (add-hook 'prog-mode-hook #'flycheck-mode)
+    :hook
+    ((prog-mode flycheck-mode))
     :config
     (setq-default
      flycheck-display-errors-delay        0.3
      flycheck-check-syntax-automatically  '(mode-enabled save)
      flycheck-indication-mode             'right-fringe
      )
-    (setq-default flycheck-gcc-language-standard "c++17")
-    (setq-default flycheck-clang-language-standard "c++17")
+    (setq-default flycheck-gcc-language-standard "c++21")
+    (setq-default flycheck-clang-language-standard "c++21")
     )
 
 (use-package restclient
@@ -233,12 +235,15 @@
   (add-to-list 'auto-mode-alist '("\\.rest$" . restclient-mode))
   (add-to-list 'auto-mode-alist '("\\.rest-client$" . restclient-mode)))
 
-(use-package slime
+(use-package lsp-mode
   :ensure t
-  :init
-  (setq inferior-lisp-program "sbcl")
-  :config
-  (slime-mode t))
+  :hook
+  ((clojure-mode . lsp)
+   (clojurescript-mode . lsp)
+   (clojurec-mode . lsp)))
+
+(use-package lsp-ui
+  :ensure t)
 
 (use-package cider
   :ensure t
@@ -288,8 +293,9 @@
 (use-package alchemist
   :ensure t)
 
-(use-package flycheck-mix
-  :ensure t)
+;; temporarily disabled
+;; (use-package flycheck-mix
+;;   :ensure t)
 
 ;; org mode
 (use-package org
@@ -308,6 +314,12 @@
    (emacs-lisp . t)
    (plantuml . t)
    (python . t)))
+
+(use-package org-roam
+  :ensure t
+  :config (setq org-roam-directory "~/org"))
+
+(add-hook 'after-init-hook 'org-roam-mode)
 
 ;; used to render code snippets when exporting org files
 (use-package htmlize
@@ -457,37 +469,9 @@
 (setq-default js2-basic-offset 2)
 
 ;; epub reader
-;; (use-package nov
-;;   :ensure t
-;;   :config (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-
-;; make sure mu4e is in your load-path
-(require 'mu4e)
-
-;; use mu4e for e-mail in emacs
-(setq mail-user-agent 'mu4e-user-agent)
-
-;; If you get your mail without an explicit command,
-;; use "true" for the command (this is the default)
-(setq mu4e-get-mail-command "mbsync -a")
-
-;; these must start with a "/", and must exist
-;; (i.e.. /home/user/Maildir/sent must exist)
-;; you use e.g. 'mu mkdir' to make the Maildirs if they don't
-;; already exist
-
-;; below are the defaults; if they do not exist yet, mu4e offers to
-;; create them. they can also functions; see their docstrings.
-(setq mu4e-sent-folder   "/sent")
-(setq mu4e-drafts-folder "/drafts")
-(setq mu4e-trash-folder  "/trash")
-
-;; smtp mail setting; these are the same that `gnus' uses.
-;; (setq
-;;    message-send-mail-function   'smtpmail-send-it
-;;    smtpmail-default-smtp-server "smtp.example.com"
-;;    smtpmail-smtp-server         "smtp.example.com"
-;;    smtpmail-local-domain        "example.com")
+(use-package nov
+  :ensure t
+ :config (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
 ;;; .emacs ends here
 
@@ -496,7 +480,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 10)) (:foreground "light gray" :background "black")))))
+ )
 
 ;;set GC to "sane" default again, it has been disabled to make startup faster
 (add-hook 'emacs-startup-hook
@@ -525,13 +509,11 @@
  '(cider-lein-parameters "repl :headless :host 0.0.0.0")
  '(clojure-indent-style :always-indent)
  '(custom-safe-themes
-   (quote
-    ("39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default)))
+   '("39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default))
  '(dired-listing-switches "-aBhl --group-directories-first")
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(org-agenda-files (quote ("~/org/agenda.org" "~/org/home.org")))
- '(org-export-backends (quote (ascii html icalendar latex md odt)))
+ '(initial-frame-alist '((fullscreen . maximized)))
+ '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   (quote
-    (htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist))))
+   '(lps-ui org-roam evil-mu4e chess geiser htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  ;;; init.el ends here
