@@ -218,7 +218,7 @@
 (use-package flycheck
     :ensure t
     :hook
-    ((prog-mode flycheck-mode))
+    ((prog-mode . flycheck-mode))
     :config
     (setq-default
      flycheck-display-errors-delay        0.3
