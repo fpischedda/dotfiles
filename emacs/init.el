@@ -539,7 +539,7 @@
    "Francesco Pischedda\nhttps://francesco.pischedda.info")
 
 ;; smtp mail setting
-;; MAYBE LATER
+;; MAYBE REFINE LATER
 (setq sendmail-program "/usr/bin/msmtp"
       message-sendmail-f-is-evil t
       message-sendmail-extra-arguments '("--read-envelope-from")
@@ -554,6 +554,21 @@
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
 ;; end of mu4e config
+
+;;;; EPUB Reader
+;; For now used only by nov mode
+(use-package visual-fill
+  :ensure t)
+
+(use-package nov
+  :ensure t
+  :config
+  (setq nov-text-width t)
+  (setq visual-fill-column-center-text t)
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  :hook
+  ((nov-mode . visual-line-mode)
+   (nov-mode . visual-fill-column-mode)))
 
 ;;; .emacs ends here
 
@@ -590,7 +605,7 @@
  '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+   '(nov lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  ;;; init.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
