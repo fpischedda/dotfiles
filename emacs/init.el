@@ -238,9 +238,7 @@
 (use-package lsp-mode
   :ensure t
   :hook
-  ((clojure-mode . lsp)
-   (clojurescript-mode . lsp)
-   (clojurec-mode . lsp)))
+  ((python-mode . lsp)))
 
 (use-package lsp-ui
   :ensure t)
