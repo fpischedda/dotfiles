@@ -30,6 +30,7 @@ Plug 'w0rp/ale'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
 " Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
@@ -40,8 +41,6 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
