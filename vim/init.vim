@@ -17,7 +17,7 @@ Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Autocompletion
-Plug 'Shougo/deoplete.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Plug 'ncm2/float-preview.nvim'
 
 " Async Lint Engine
@@ -30,6 +30,7 @@ Plug 'w0rp/ale'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
 " Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
@@ -40,8 +41,6 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " FZF integration
 Plug '/usr/fzf'
@@ -104,9 +103,9 @@ let g:ackprg = 'rg --vimgrep'
 let g:ack_autoclose = 1
 cnoreabbrev Ack Ack!
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-set completeopt-=preview
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+" set completeopt-=preview
 
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
