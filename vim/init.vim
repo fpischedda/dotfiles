@@ -7,8 +7,6 @@ Plug 'liuchengxu/vim-better-default'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'luochen1990/rainbow'
 
@@ -28,11 +26,16 @@ Plug 'w0rp/ale'
 " Finding files
 " Plug 'liuchengxu/vim-clap'
 
+" vim-iced, plugin for Clojure
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
-Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
-Plug 'tpope/vim-dispatch'
-Plug 'clojure-vim/vim-jack-in'
-Plug 'radenling/vim-dispatch-neovim'
+" Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
+" Plug 'tpope/vim-dispatch'
+" Plug 'clojure-vim/vim-jack-in'
+" Plug 'radenling/vim-dispatch-neovim'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
@@ -181,3 +184,6 @@ set secure
 " run black infile save
 autocmd BufWritePre *.py execute ':Black'
 let maplocalleader = ","
+
+" Tell vim-iced to use <LocalLeader>
+let g:iced_enable_default_key_mappings = v:true
