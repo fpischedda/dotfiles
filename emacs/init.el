@@ -199,7 +199,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
-  (setq projectile-globally-ignored-directories '(".git" ".projectile" "build"))
+  (setq projectile-globally-ignored-directories '(".git" ".projectile" "build" ".clj-kondo"))
   (setq projectile-sort-order 'modification-time)
   (setq projectile-project-search-path '("~/work/"))
   (projectile-mode +1))
