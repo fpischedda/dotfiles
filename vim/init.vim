@@ -16,6 +16,9 @@ Plug 'mileszs/ack.vim'
 " Fuzzy file finder
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Tree view
+Plug 'preservim/nerdtree'
+
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Plug 'ncm2/float-preview.nvim'
@@ -186,3 +189,15 @@ let maplocalleader = ","
 
 " Tell vim-iced to use <LocalLeader>
 let g:iced_enable_default_key_mappings = v:true
+
+" Bindings for NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
+
+" ignore files and directories for ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v(\.git|\.hg|\.svn|\.cache|env)$',
+  \ 'file': '\v\.(pyc|so)$',
+  \ }

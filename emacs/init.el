@@ -43,7 +43,7 @@
   (require 'use-package))
 
 ;; custom font
-(set-frame-font "Hack-13" nil t)
+(set-frame-font "Hack-15" nil t)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -53,10 +53,7 @@
 (use-package vterm
   :ensure t)
 
-(use-package modus-operandi-theme
-  :ensure t)
-
-(use-package modus-vivendi-theme
+(use-package modus-themes
   :ensure t)
 
 (use-package material-theme
@@ -79,7 +76,7 @@
   :config
   (when (string= system-type "darwin")
     (setq dired-use-ls-dired t
-	  insert-directory-program "/usr/local/bin/gls"))
+	  insert-directory-program nil))
   :custom
   (dired-listing-switches "-aBhl --group-directories-first"))
 
@@ -212,9 +209,9 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
-  (setq projectile-globally-ignored-directories '(".git" ".projectile" "build" "env" "env2" ".shadow-cljs"))
+  (setq projectile-globally-ignored-directories '("*.git" "*.projectile" "*build" "*env" "*env2" "*.shadow-cljs" "*.cache"))
   (setq projectile-sort-order 'modification-time)
-  (setq projectile-project-search-path '("~/work/" "~/quicklisp/local-projects"))
+  (setq projectile-project-search-path '("~/works/" "~/quicklisp/local-projects"))
   (projectile-mode +1))
 
 (use-package flx-ido
@@ -307,7 +304,7 @@
   )
 
 ;; Clojure lsp settings
-(setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
+;; (setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
 
 
 ;; Elixir related pachages - temporarily disabled
@@ -571,7 +568,7 @@
  '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(nov lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
+   '(visual-fill nov lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
  ;;; init.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
