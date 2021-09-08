@@ -50,6 +50,9 @@
   :config (when (memq window-system '(mac ns x))
 	    (exec-path-from-shell-initialize)))
 
+(use-package sly
+  :ensure t)
+
 (use-package vterm
   :ensure t)
 
@@ -144,8 +147,8 @@
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
-  :config (evil-mode 1)
-  (add-to-list 'evil-emacs-state-modes 'lisp-mode))
+  :config
+  (evil-mode 1))
 
 (use-package evil-nerd-commenter
   :ensure t
@@ -246,12 +249,12 @@
          ("\\.restclient\\'" . restclient-mode)
 	 ("\\.http\\'" . restclient-mode)))
 
-(use-package slime
-  :ensure t
-  :init
-  (setq inferior-lisp-program "sbcl")
-  :config
-  (slime-mode t))
+;; (use-package slime
+;;   :ensure t
+;;   :init
+;;   (setq inferior-lisp-program "sbcl")
+;;   :config
+;;   (slime-mode t))
 
 (use-package lsp-ui
   :ensure t)
