@@ -307,6 +307,10 @@
 (setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
 
 
+;; Scheme
+(use-package geiser-chez
+  :ensure t)
+
 ;; Elixir related pachages - temporarily disabled
 ;; (use-package elixir-mode
 ;;   :ensure t)
