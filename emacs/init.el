@@ -88,7 +88,7 @@
   :config (which-key-mode))
 
 ;; run multi-term pressing F1
-(global-set-key [f1] 'term)
+(global-set-key [f1] 'vterm)
 
 (use-package smartparens
   :ensure t
