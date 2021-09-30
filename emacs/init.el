@@ -253,42 +253,62 @@
 (use-package lsp-ui
   :ensure t)
 
+(use-package lsp-mode
+  :ensure t
+  :hook ((clojure-mode . lsp)
+	 (clojurescript-mode . lsp)
+	 (clojurec-mpde lsp))
+
+  :commands lsp
+
+  :config
+  (setq ;; recommended
+        gc-cons-threshold (* 100 1024 1024)
+	read-process-output-max (* 1024 1024))
+  (setq ;; optional
+   lsp-lens-enable t
+   lsp-semantic-tokens-enable t
+   cljr-add-ns-to-blank-clj-files nil
+   cider-eldoc-display-for-symbol-at-point nil))
+
 (use-package lsp-ui
   :ensure t)
 
 ;;;; Clojure
 (use-package cider
   :ensure t
+  :hook ((cider-mode . sb/unload-cider-jumps)
+	 (cider-repl-mode . sb/unload-cider-jumps))
+  :config
+  (defun sb/unload-cider-jumps ()
+    ;; I prefer lsp's jumps, so kindly don't steal them
+    (define-key cider-mode-map (kbd "M-.") nil)
+    (define-key cider-mode-map (kbd "M-,") nil))
+  :custom
+  (cider-prompt-for-symbol nil)
+  (cider-redirect-server-output-to-repl nil)
+  (cider-prefer-local-resources t)
+  (cider-auto-track-ns-form-changes t)
+  (cider-repl-pop-to-buffer-on-connect t)
+  (cider-eldoc-display-context-dependent-info t)
+  (cider-font-lock-dynamically '(macro core function var))
+  (cider-auto-select-error-buffer t)
   :init
-;; go right to the REPL buffer when it's finished connecting
-  (setq cider-repl-pop-to-buffer-on-connect t)
-;; When there's a cider error, show its buffer and switch to it
-  (setq cider-show-error-buffer t)
-  (setq cider-auto-select-error-buffer t)
 ;; Where to store the cider history.
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
 ;; Wrap when navigating history.
   (setq cider-repl-wrap-history t)
-  (setq cider-lein-parameters "repl :headless :host 127.0.0.1")
   :bind (("C-." . cider-docview-source)))
 
-(use-package flycheck-clj-kondo
-  :ensure t)
+;; (use-package flycheck-clj-kondo
+;;   :ensure t)
 
 (use-package clojure-mode
   :ensure t
   :mode
 ;; Use clojure mode for other file extensions
   (("\\.edn$" . clojure-mode)
-   ("\\.boot$" . clojure-mode)
-   ("lein-env" . enh-ruby-mode))
-  :config
-  (require 'flycheck-clj-kondo)
-  :hook
-  ((clojure-mode . lsp)
-   (clojurescript . lsp)
-   (clojurec-mode . lsp))
-  )
+   ("\\.boot$" . clojure-mode)))
 
 ;; A little more syntax highlighting
 (use-package clojure-mode-extra-font-locking
