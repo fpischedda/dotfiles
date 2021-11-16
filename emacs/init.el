@@ -45,13 +45,13 @@
 ;; custom font
 (set-frame-font "Hack-13" nil t)
 
+(use-package all-the-icons
+  :ensure t)
+
 (use-package exec-path-from-shell
   :ensure t
   :config (when (memq window-system '(mac ns x))
 	    (exec-path-from-shell-initialize)))
-
-(use-package sly
-  :ensure t)
 
 (use-package vterm
   :ensure t)
@@ -60,18 +60,6 @@
   :ensure t)
 
 (use-package modus-vivendi-theme
-  :ensure t)
-
-(use-package material-theme
-  :ensure t)
-
-(use-package nord-theme
-  :ensure t)
-
-(use-package monochrome-theme
-  :ensure t)
-
-(use-package acme-theme
   :ensure t)
 
 ;; load selected theme
@@ -94,7 +82,7 @@
   :config (which-key-mode))
 
 ;; run multi-term pressing F1
-(global-set-key [f1] 'term)
+(global-set-key [f1] 'vterm)
 
 (use-package smartparens
   :ensure t
@@ -128,7 +116,6 @@
 (use-package magit
   :ensure t
   :config (global-set-key (kbd "C-x g") 'magit-status))
-
 
 (use-package plantuml-mode
   :ensure t)
@@ -166,29 +153,26 @@
   :config
   (evil-collection-init))
 
-(use-package yasnippet
-  :ensure t
-  :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
-
-(use-package all-the-icons
-  :ensure t)
+;; (use-package yasnippet
+;;   :ensure t
+;;   :init
+;;   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
 ; testing doom-modeline
 (use-package doom-modeline
       :ensure t
       :defer t
-      :hook (after-init . doom-modeline-init))
+      :hook (after-init . doom-modeline-mode))
 
 (use-package avy
-  :ensure t)
+  :ensure t
+  :bind (("C-:" . avy-goto-word-1)
+	 ("C-;" . avy-goto-word-0-regexp)))
 
 (use-package ivy
   :ensure t
   :diminish (ivy-mode . "") ; does not display ivy in the modeline
   :init (ivy-mode 1)        ; enable ivy globally at startup
-  :bind (:map ivy-mode-map  ; bind in the ivy buffer
-         ("C-'" . ivy-avy)) ; C-' to ivy-avy
   :config
   (setq ivy-use-virtual-buffers t)   ; extend searching to bookmarks and …
   (setq ivy-height 20)               ; set height of the ivy window
@@ -218,9 +202,6 @@
   (setq projectile-project-search-path '("~/work/" "~/quicklisp/local-projects"))
   (projectile-mode +1))
 
-(use-package flx-ido
-  :ensure t)
-
 (use-package company
   :config
   (setq company-idle-delay 0.3)
@@ -249,15 +230,15 @@
          ("\\.restclient\\'" . restclient-mode)
 	 ("\\.http\\'" . restclient-mode)))
 
-;; (use-package slime
-;;   :ensure t
-;;   :init
-;;   (setq inferior-lisp-program "sbcl")
-;;   :config
-;;   (slime-mode t))
+(use-package slime
+  :ensure t
+  :init
+  (setq inferior-lisp-program "sbcl")
+  :config
+  (slime-mode t))
 
-(use-package lsp-ui
-  :ensure t)
+;; (use-package lsp-ui
+;;   :ensure t)
 
 ;;;; Clojure
 (use-package cider
@@ -310,18 +291,8 @@
 (setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
 
 
-;; Scheme
-(use-package geiser-chez
-  :ensure t)
-
-;; Elixir related pachages - temporarily disabled
-;; (use-package elixir-mode
-;;   :ensure t)
-
-;; (use-package alchemist
-;;   :ensure t)
-
-;; (use-package flycheck-mix
+;; ;; Scheme
+;; (use-package geiser-chez
 ;;   :ensure t)
 
 ;; org mode
@@ -338,6 +309,7 @@
  'org-babel-load-languages
  '((sql . t)
    (lisp . t)
+   (clojure . t)
    (emacs-lisp . t)
    (plantuml . t)
    (python . t)))
@@ -350,21 +322,9 @@
   :ensure t
   :init (setq org-reveal-root "file:///~/reveal.js"))
 
-; ORG mode customizations
-;; (font-lock-add-keywords 'org-mode
-;;                         '(("^ +\\([-*]\\) "
-;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
 (use-package org-bullets
   :ensure t
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
-
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/agenda.org"
-                             "~/org/home.org"))
-
-;; shortcut to open org index
-(set-register ?o '(file . "~/org/index.org"))
 
 ;; custom TODO workflow
 (setq org-todo-keywords
@@ -374,13 +334,13 @@
         (sequence "|" "RECURRING(r)")
         (sequence "|" "CANCELED(c)")))
 
-;; trying org-roam
-(use-package org-roam
-  :ensure t
-  :init
-  (add-hook 'after-init-hook 'org-roam-mode)
-  (setq org-roam-v2-ack t)
-  :config (setq org-roam-directory "~/org"))
+;; ;; trying org-roam
+;; (use-package org-roam
+;;   :ensure t
+;;   :init
+;;   (add-hook 'after-init-hook 'org-roam-mode)
+;;   (setq org-roam-v2-ack t)
+;;   :config (setq org-roam-directory "~/org"))
 
 ; redifine some modeline
 (defmacro rename-modeline (package-name mode new-name)
@@ -407,11 +367,6 @@
 (use-package pyvenv
   :ensure t)
 
-; a fix needed to run ipython4 as a shell inside emacs
-; link: https://www.reddit.com/r/Python/comments/4w5d4e/psa_ipython_5_will_break_emacs_heres_how_to_fix_it/
-(setq python-shell-interpreter "ipython"
-  python-shell-interpreter-args "--simple-prompt")
-
 (use-package yaml-mode
   :ensure t)
 
@@ -430,72 +385,72 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;; Rust support
-(use-package rust-mode
-  :ensure t)
+;; ;; Rust support
+;; (use-package rust-mode
+;;   :ensure t)
 
-(use-package flycheck-rust
-  :ensure t)
+;; (use-package flycheck-rust
+;;   :ensure t)
 
-(use-package toml-mode
-  :ensure t
-  :mode (("\\.tscn\\'" . toml-mode)))
+;; (use-package toml-mode
+;;   :ensure t
+;;   :mode (("\\.tscn\\'" . toml-mode)))
 
-;; c/c++ & lsp-mode
-(setq c-default-style "linux"
-      c-basic-offset 4)
+;; ;; c/c++ & lsp-mode
+;; (setq c-default-style "linux"
+;;       c-basic-offset 4)
 
-(use-package rtags
-  :ensure t
-  :hook
-  ((c++-mode . rtags-start-process-unless-running)
-   (c-mode . rtags-start-process-unless-running))
-  :config (setq rtags-completions-enabled t
-		rtags-path "~/.emacs.d/rtags/src/rtags.el"
-		rtags-rc-binary-name "~/bin/rc"
-		rtags-use-company t
-		rtags-rdm-binary-name "~/bin/rdm")
-  :bind (("C-c E" . rtags-find-symbol)
-  	 ("C-c e" . rtags-find-symbol-at-point)
-  	 ("C-c O" . rtags-find-references)
-  	 ("C-c o" . rtags-find-references-at-point)
-  	 ("C-c s" . rtags-find-file)
-  	 ("C-c v" . rtags-find-virtuals-at-point)
-  	 ("C-c F" . rtags-fixit)
-  	 ("C-c f" . rtags-location-stack-forward)
-  	 ("C-c b" . rtags-location-stack-back)
-  	 ("C-c n" . rtags-next-match)
-  	 ("C-c p" . rtags-previous-match)
-  	 ("C-c P" . rtags-preprocess-file)
-  	 ("C-c R" . rtags-rename-symbol)
-  	 ("C-c x" . rtags-show-rtags-buffer)
-  	 ("C-c T" . rtags-print-symbol-info)
-  	 ("C-c t" . rtags-symbol-type)
-  	 ("C-c I" . rtags-include-file)
-  	 ("C-c i" . rtags-get-include-file-for-symbol)))
+;; (use-package rtags
+;;   :ensure t
+;;   :hook
+;;   ((c++-mode . rtags-start-process-unless-running)
+;;    (c-mode . rtags-start-process-unless-running))
+;;   :config (setq rtags-completions-enabled t
+;; 		rtags-path "~/.emacs.d/rtags/src/rtags.el"
+;; 		rtags-rc-binary-name "~/bin/rc"
+;; 		rtags-use-company t
+;; 		rtags-rdm-binary-name "~/bin/rdm")
+;;   :bind (("C-c E" . rtags-find-symbol)
+;;   	 ("C-c e" . rtags-find-symbol-at-point)
+;;   	 ("C-c O" . rtags-find-references)
+;;   	 ("C-c o" . rtags-find-references-at-point)
+;;   	 ("C-c s" . rtags-find-file)
+;;   	 ("C-c v" . rtags-find-virtuals-at-point)
+;;   	 ("C-c F" . rtags-fixit)
+;;   	 ("C-c f" . rtags-location-stack-forward)
+;;   	 ("C-c b" . rtags-location-stack-back)
+;;   	 ("C-c n" . rtags-next-match)
+;;   	 ("C-c p" . rtags-previous-match)
+;;   	 ("C-c P" . rtags-preprocess-file)
+;;   	 ("C-c R" . rtags-rename-symbol)
+;;   	 ("C-c x" . rtags-show-rtags-buffer)
+;;   	 ("C-c T" . rtags-print-symbol-info)
+;;   	 ("C-c t" . rtags-symbol-type)
+;;   	 ("C-c I" . rtags-include-file)
+;;   	 ("C-c i" . rtags-get-include-file-for-symbol)))
 
-(use-package flycheck-rtags
-    :ensure t
-    :after flycheck rtags
-    :config
-    (defun my-flycheck-rtags-setup ()
-      (flycheck-select-checker 'rtags)
-      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-      (setq-local flycheck-check-syntax-automatically nil)
-      )
-    (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
-    (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
-    (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
-    )
+;; (use-package flycheck-rtags
+;;     :ensure t
+;;     :after flycheck rtags
+;;     :config
+;;     (defun my-flycheck-rtags-setup ()
+;;       (flycheck-select-checker 'rtags)
+;;       (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+;;       (setq-local flycheck-check-syntax-automatically nil)
+;;       )
+;;     (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+;;     (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+;;     (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
+;;     )
 
-(use-package ivy-rtags
-  :ensure t
-  :config
-  (setq rtags-display-result-backend 'ivy))
+;; (use-package ivy-rtags
+;;   :ensure t
+;;   :config
+;;   (setq rtags-display-result-backend 'ivy))
 
-(use-package company-rtags
-  :ensure t
-  :config (push 'company-rtags company-backends))
+;; (use-package company-rtags
+;;   :ensure t
+;;   :config (push 'company-rtags company-backends))
 
 
 ;; mu4e
@@ -530,54 +485,39 @@
        (:from          .  22)
        (:subject       .  nil))) ;; alternatively, use :thread-subject
 
-;; program to get mail; alternatives are 'fetchmail', 'getmail'
-;; isync or your own shellscript. called when 'U' is pressed in
-;; main view.
+;; ;; program to get mail; alternatives are 'fetchmail', 'getmail'
+;; ;; isync or your own shellscript. called when 'U' is pressed in
+;; ;; main view.
 
-;; If you get your mail without an explicit command,
-;; use "true" for the command (this is the default)
-(setq mu4e-get-mail-command "mbsync -a")
+;; ;; If you get your mail without an explicit command,
+;; ;; use "true" for the command (this is the default)
+;; (setq mu4e-get-mail-command "mbsync -a")
 
-;; general emacs mail settings; used when composing e-mail
-;; the non-mu4e-* stuff is inherited from emacs/message-mode
-(setq mu4e-compose-reply-to-address "francesco@pischedda.info"
-      user-mail-address "francesco@pischedda.info"
-      user-full-name  "Francesco Pischedda")
+;; ;; general emacs mail settings; used when composing e-mail
+;; ;; the non-mu4e-* stuff is inherited from emacs/message-mode
+;; (setq mu4e-compose-reply-to-address "francesco@pischedda.info"
+;;       user-mail-address "francesco@pischedda.info"
+;;       user-full-name  "Francesco Pischedda")
 
-(setq mu4e-compose-signature
-   "Francesco Pischedda\nhttps://francesco.pischedda.info")
+;; (setq mu4e-compose-signature
+;;    "Francesco Pischedda\nhttps://francesco.pischedda.info")
 
-;; smtp mail setting
-;; MAYBE REFINE LATER
-(setq sendmail-program "/usr/bin/msmtp"
-      message-sendmail-f-is-evil t
-      message-sendmail-extra-arguments '("--read-envelope-from")
-      send-mail-function 'smtpmail-send-it
-      message-send-mail-function 'message-send-mail-with-sendmail)
+;; ;; smtp mail setting
+;; ;; MAYBE REFINE LATER
+;; (setq sendmail-program "/usr/bin/msmtp"
+;;       message-sendmail-f-is-evil t
+;;       message-sendmail-extra-arguments '("--read-envelope-from")
+;;       send-mail-function 'smtpmail-send-it
+;;       message-send-mail-function 'message-send-mail-with-sendmail)
 
-;;    ;; if you need offline mode, set these -- and create the queue dir
-;;    ;; with 'mu mkdir', i.e.. mu mkdir /home/user/Maildir/queue
-;;    smtpmail-queue-mail  nil
-;;    smtpmail-queue-dir  "/home/user/Maildir/queue/cur")
+;; ;;    ;; if you need offline mode, set these -- and create the queue dir
+;; ;;    ;; with 'mu mkdir', i.e.. mu mkdir /home/user/Maildir/queue
+;; ;;    smtpmail-queue-mail  nil
+;; ;;    smtpmail-queue-dir  "/home/user/Maildir/queue/cur")
 
-;; don't keep message buffers around
-(setq message-kill-buffer-on-exit t)
-;; end of mu4e config
-
-;;;; EPUB Reader
-;; For now used only by nov mode
-(use-package visual-fill
-  :ensure t)
-
-(use-package nov
-  :ensure t
-  :config
-  (setq nov-text-width t)
-  (setq visual-fill-column-center-text t)
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  :hook
-  ((nov-mode . visual-line-mode)
-   (nov-mode . visual-fill-column-mode)))
+;; ;; don't keep message buffers around
+;; (setq message-kill-buffer-on-exit t)
+;; ;; end of mu4e config
 
 ;;; .emacs ends here
 
@@ -600,25 +540,5 @@
 (add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
 (add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(cider-lein-parameters "repl :headless :host 0.0.0.0")
- '(clojure-indent-style :always-indent)
- '(custom-safe-themes
-   '("6339e18e32734507d5b70817fbd490cdf1761826d7445153215ad7ee63ee3931" "afd761c9b0f52ac19764b99d7a4d871fc329f7392dfc6cd29710e8209c691477" "befd48e22121985f7bdbb188704bd3fdb12697d5031c0f0c4d4cb34f8fa3024c" "248bdabe33857dd0f9700a4630526f5a0f4867afab418188f8f2eaca73dfc6c8" "18cc5dd284685a224ab24873911cfb467a06c1fe45b121c8aa073920179ce070" "aec089c0a0e043589bf8d9d99fe2e330073a3a1e75c7eb51262835d6046a9e22" "41fa754692f20e6ed36b6038f710ff56c247f05de6edb6d5680215ffabfb88a2" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "d6c5b8dc6049f2e9dabdfcafa9ef2079352640e80dffe3e6cc07c0f89cbf9748" "28caf31770f88ffaac6363acfda5627019cac57ea252ceb2d41d98df6d87e240" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "37ba833442e0c5155a46df21446cadbe623440ccb6bbd61382eb869a2b9e9bf9" "abdb1863bc138f43c29ddb84f614b14e3819982936c43b974224641b0b6b8ba4" default))
- '(dired-listing-switches "-aBhl --group-directories-first")
- '(initial-frame-alist '((fullscreen . maximized)))
- '(org-agenda-files '("~/org/agenda.org" "~/org/home.org"))
- '(org-export-backends '(ascii html icalendar latex md odt))
- '(package-selected-packages
-   '(nov lsp-python-ms org-roam-server vterm org-roam acme-theme flycheck-clj-kondo pyvenv all-the-icons-ivy-rich modus-operandi-theme modus-vivendi-theme htmlize ivy-rtags flycheck-rtags ccls rtags monochrome-theme nord-theme dracula-theme phps-mode company-lsp lsp-ui lsp-mode use-package flycheck-rust rust-mode material-theme paper-theme auto-org-md markdown-mode cider-eval-sexp-fu flx-ido discover w3m evil-collection-neotree restclient cframe restart-emacs treemacs-projectile treemacs-magit treemacs-evil treemacs mastodon groovy-mode jenkins flycheck-plantuml plantuml-mode all-the-icons-ivy cider paredit-mode zenburn-theme web-mode tagedit slime-clj slime rainbow-delimiters pylint projectile powerline-evil ox-reveal org-bullets multi-term magit-popup jedi-direx ivy helm golint go-complete go-autocomplete go git-commit flycheck-pyflakes exec-path-from-shell evil-surround erlang elpy elixir-yasnippets elixir-mix django-mode darkokai-theme cython-mode column-marker column-enforce-mode clojure-mode-extra-font-locking clj-refactor calfw-gcal calfw android-mode alchemist)))
- ;;; init.el ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(provide 'init)
+;;; init.el ends here
