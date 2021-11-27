@@ -56,10 +56,7 @@
 (use-package vterm
   :ensure t)
 
-(use-package modus-operandi-theme
-  :ensure t)
-
-(use-package modus-vivendi-theme
+(use-package modus-themes
   :ensure t)
 
 ;; load selected theme
@@ -304,6 +301,9 @@
   (define-key global-map "\C-ca" 'org-agenda)
   (setq org-log-done t))
 
+(use-package ob-restclient
+  :ensure t)
+
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -312,6 +312,7 @@
    (clojure . t)
    (emacs-lisp . t)
    (plantuml . t)
+   (restclient . t)
    (python . t)))
 
 ;; used to render code snippets when exporting org files
@@ -334,13 +335,21 @@
         (sequence "|" "RECURRING(r)")
         (sequence "|" "CANCELED(c)")))
 
-;; ;; trying org-roam
-;; (use-package org-roam
-;;   :ensure t
-;;   :init
-;;   (add-hook 'after-init-hook 'org-roam-mode)
-;;   (setq org-roam-v2-ack t)
-;;   :config (setq org-roam-directory "~/org"))
+;; trying org-roam
+(use-package org-roam
+  :ensure t
+  :after org
+  :init (setq org-roam-v2-ack t)
+  :custom (org-roam-directory "~/org")
+  :config (org-roam-setup)
+  :bind (("C-c n f" . org-roam-node-find)
+           ("C-c n r" . org-roam-node-random)
+           (:map org-mode-map
+                 (("C-c n i" . org-roam-node-insert)
+                  ("C-c n o" . org-id-get-create)
+                  ("C-c n t" . org-roam-tag-add)
+                  ("C-c n a" . org-roam-alias-add)
+                  ("C-c n l" . org-roam-buffer-toggle)))))
 
 ; redifine some modeline
 (defmacro rename-modeline (package-name mode new-name)
@@ -542,3 +551,16 @@
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(ob-restclient which-key vterm visual-fill use-package toml-mode smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pyvenv projectile plantuml-mode ox-reveal org-roam org-bullets nov modus-vivendi-theme modus-operandi-theme magit lsp-ui lsp-python-ms ivy-rtags htmlize geiser-chez flycheck-rust flycheck-rtags flycheck-clj-kondo exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel company-rtags clojure-mode-extra-font-locking clj-refactor avy)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
