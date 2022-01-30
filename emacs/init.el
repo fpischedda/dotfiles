@@ -51,13 +51,19 @@
   :ensure t
   :config (which-key-mode))
 
+;; use ripgrep to grep
+(use-package deadgrep
+  :ensure t
+  :bind (( "C-x C-g" . deadgrep)))
+
+
 ;; custom font
 (set-frame-font "Hack-15" nil t)
 
-;; (use-package exec-path-from-shell
-;;   :ensure t
-;;   :config (when (memq window-system '(mac ns x))
-;; 	    (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :ensure t
+  :config (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize)))
 
 (use-package vterm
   :ensure t)
