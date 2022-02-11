@@ -14,7 +14,7 @@ Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 
 " Fuzzy file finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 
 " Tree view
 Plug 'preservim/nerdtree'
@@ -199,8 +199,5 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
-" ignore files and directories for ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v(\.git|\.hg|\.svn|\.cache|env)$',
-  \ 'file': '\v\.(pyc|so)$',
-  \ }
+" map CTRL-p to FZF instead of ctrlp plugin
+nnoremap <C-p> :GFiles<Cr>
