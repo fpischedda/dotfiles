@@ -46,7 +46,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'natebosch/vim-lsc'
 
 " FZF integration
-Plug '/usr/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Markdown syntax highlight
@@ -92,7 +92,10 @@ call plug#end()
 
 " colorscheme PaperColor
 " colorscheme gruvbox
-colorscheme apprentice
+" colorscheme apprentice
+set termguicolors
+set background=dark
+colorscheme toast
 
 " Activate rainbow parens
 let g:rainbow_active = 1
