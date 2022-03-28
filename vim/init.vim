@@ -27,16 +27,13 @@ Plug 'w0rp/ale'
 " Plug 'liuchengxu/vim-clap'
 
 " vim-iced, plugin for Clojure
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'liquidz/vim-iced', {'for': 'clojure'}
-Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+" Plug 'guns/vim-sexp'
+" Plug 'tpope/vim-sexp-mappings-for-regular-people'
+" Plug 'liquidz/vim-iced', {'for': 'clojure'}
+" Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
-" Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
-" Plug 'tpope/vim-dispatch'
-" Plug 'clojure-vim/vim-jack-in'
-" Plug 'radenling/vim-dispatch-neovim'
+Plug 'Olical/conjure'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
@@ -102,10 +99,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ackprg = 'rg --vimgrep'
 let g:ack_autoclose = 1
 cnoreabbrev Ack Ack!
-
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-" set completeopt-=preview
 
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
