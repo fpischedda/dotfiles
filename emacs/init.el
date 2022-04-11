@@ -37,7 +37,7 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(setq initial-frame-alist '((fullscreen . maximized)))
+(setq default-frame-alist '((fullscreen . maximized)))
 
 (package-initialize)
 
