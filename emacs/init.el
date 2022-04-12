@@ -34,9 +34,9 @@
 (show-paren-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+;; (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+;; (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
 (eval-when-compile
@@ -52,9 +52,6 @@
   :ensure t
   :config (when (memq window-system '(mac ns x))
 	    (exec-path-from-shell-initialize)))
-
-(use-package vterm
-  :ensure t)
 
 (use-package modus-themes
   :ensure t)
@@ -288,13 +285,12 @@
   (cljr-add-keybindings-with-prefix "C-c C-m")
   )
 
-;; Clojure lsp settings
-(setq lsp-clojure-custom-server-command '("bash" "-c" "~/bin/clojure-lsp"))
+;; Scheme
+(use-package geiser-chez
+  :ensure t)
 
-
-;; ;; Scheme
-;; (use-package geiser-chez
-;;   :ensure t)
+(use-package geiser-guile
+  :ensure t)
 
 ;; org mode
 (use-package org
