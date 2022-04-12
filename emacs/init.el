@@ -59,6 +59,10 @@
 (use-package modus-themes
   :ensure t)
 
+(use-package ace-window
+  :ensure t
+  :bind (("M-o" . ace-window)))
+
 ;; load selected theme
 (load-theme 'modus-vivendi t)
 
