@@ -394,13 +394,6 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;; ;; Rust support
-;; (use-package rust-mode
-;;   :ensure t)
-
-;; (use-package flycheck-rust
-;;   :ensure t)
-
 ;; (use-package toml-mode
 ;;   :ensure t
 ;;   :mode (("\\.tscn\\'" . toml-mode)))
@@ -408,125 +401,6 @@
 ;; ;; c/c++ & lsp-mode
 ;; (setq c-default-style "linux"
 ;;       c-basic-offset 4)
-
-;; (use-package rtags
-;;   :ensure t
-;;   :hook
-;;   ((c++-mode . rtags-start-process-unless-running)
-;;    (c-mode . rtags-start-process-unless-running))
-;;   :config (setq rtags-completions-enabled t
-;; 		rtags-path "~/.emacs.d/rtags/src/rtags.el"
-;; 		rtags-rc-binary-name "~/bin/rc"
-;; 		rtags-use-company t
-;; 		rtags-rdm-binary-name "~/bin/rdm")
-;;   :bind (("C-c E" . rtags-find-symbol)
-;;   	 ("C-c e" . rtags-find-symbol-at-point)
-;;   	 ("C-c O" . rtags-find-references)
-;;   	 ("C-c o" . rtags-find-references-at-point)
-;;   	 ("C-c s" . rtags-find-file)
-;;   	 ("C-c v" . rtags-find-virtuals-at-point)
-;;   	 ("C-c F" . rtags-fixit)
-;;   	 ("C-c f" . rtags-location-stack-forward)
-;;   	 ("C-c b" . rtags-location-stack-back)
-;;   	 ("C-c n" . rtags-next-match)
-;;   	 ("C-c p" . rtags-previous-match)
-;;   	 ("C-c P" . rtags-preprocess-file)
-;;   	 ("C-c R" . rtags-rename-symbol)
-;;   	 ("C-c x" . rtags-show-rtags-buffer)
-;;   	 ("C-c T" . rtags-print-symbol-info)
-;;   	 ("C-c t" . rtags-symbol-type)
-;;   	 ("C-c I" . rtags-include-file)
-;;   	 ("C-c i" . rtags-get-include-file-for-symbol)))
-
-;; (use-package flycheck-rtags
-;;     :ensure t
-;;     :after flycheck rtags
-;;     :config
-;;     (defun my-flycheck-rtags-setup ()
-;;       (flycheck-select-checker 'rtags)
-;;       (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-;;       (setq-local flycheck-check-syntax-automatically nil)
-;;       )
-;;     (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
-;;     (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
-;;     (add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
-;;     )
-
-;; (use-package ivy-rtags
-;;   :ensure t
-;;   :config
-;;   (setq rtags-display-result-backend 'ivy))
-
-;; (use-package company-rtags
-;;   :ensure t
-;;   :config (push 'company-rtags company-backends))
-
-
-;; mu4e
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-
-(require 'mu4e)
-
-;; use mu4e for e-mail in emacs
-(setq mail-user-agent 'mu4e-user-agent)
-
-;; the next are relative to the root maildir
-;; (see `mu info`).
-;; instead of strings, they can be functions too, see
-;; their docstring or the chapter 'Dynamic folders'
-(setq mu4e-sent-folder   "/Sent"
-      mu4e-drafts-folder "/Drafts"
-      mu4e-trash-folder  "/Trash")
-
-;; the maildirs you use frequently; access them with 'j' ('jump')
-(setq   mu4e-maildir-shortcuts
-    '((:maildir "/gmail/inbox" :key ?g)
-      (:maildir "/yahoo/inbox"   :key ?y)
-      (:maildir "/yandex/inbox"    :key ?x)))
-
-;; the headers to show in the headers list -- a pair of a field
-;; and its width, with `nil' meaning 'unlimited'
-;; (better only use that for the last field.
-;; These are the defaults:
-(setq mu4e-headers-fields
-    '( (:date          .  25)    ;; alternatively, use :human-date
-       (:flags         .   6)
-       (:from          .  22)
-       (:subject       .  nil))) ;; alternatively, use :thread-subject
-
-;; ;; program to get mail; alternatives are 'fetchmail', 'getmail'
-;; ;; isync or your own shellscript. called when 'U' is pressed in
-;; ;; main view.
-
-;; ;; If you get your mail without an explicit command,
-;; ;; use "true" for the command (this is the default)
-;; (setq mu4e-get-mail-command "mbsync -a")
-
-;; ;; general emacs mail settings; used when composing e-mail
-;; ;; the non-mu4e-* stuff is inherited from emacs/message-mode
-;; (setq mu4e-compose-reply-to-address "francesco@pischedda.info"
-;;       user-mail-address "francesco@pischedda.info"
-;;       user-full-name  "Francesco Pischedda")
-
-;; (setq mu4e-compose-signature
-;;    "Francesco Pischedda\nhttps://francesco.pischedda.info")
-
-;; ;; smtp mail setting
-;; ;; MAYBE REFINE LATER
-;; (setq sendmail-program "/usr/bin/msmtp"
-;;       message-sendmail-f-is-evil t
-;;       message-sendmail-extra-arguments '("--read-envelope-from")
-;;       send-mail-function 'smtpmail-send-it
-;;       message-send-mail-function 'message-send-mail-with-sendmail)
-
-;; ;;    ;; if you need offline mode, set these -- and create the queue dir
-;; ;;    ;; with 'mu mkdir', i.e.. mu mkdir /home/user/Maildir/queue
-;; ;;    smtpmail-queue-mail  nil
-;; ;;    smtpmail-queue-dir  "/home/user/Maildir/queue/cur")
-
-;; ;; don't keep message buffers around
-;; (setq message-kill-buffer-on-exit t)
-;; ;; end of mu4e config
 
 ;;; .emacs ends here
 
@@ -557,7 +431,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ob-restclient which-key vterm visual-fill use-package toml-mode smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pyvenv projectile plantuml-mode ox-reveal org-roam org-bullets nov modus-vivendi-theme modus-operandi-theme magit lsp-ui lsp-python-ms ivy-rtags htmlize geiser-chez flycheck-rust flycheck-rtags flycheck-clj-kondo exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel company-rtags clojure-mode-extra-font-locking clj-refactor avy)))
+   '(ace-window geiser-guile ob-restclient which-key vterm visual-fill use-package toml-mode smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pyvenv projectile plantuml-mode ox-reveal org-roam org-bullets nov modus-vivendi-theme modus-operandi-theme magit lsp-ui lsp-python-ms ivy-rtags htmlize geiser-chez flycheck-rust flycheck-rtags flycheck-clj-kondo exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel company-rtags clojure-mode-extra-font-locking clj-refactor avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
