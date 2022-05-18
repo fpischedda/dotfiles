@@ -430,6 +430,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-undo-system 'undo-redo)
  '(package-selected-packages
    '(ace-window geiser-guile ob-restclient which-key vterm visual-fill use-package toml-mode smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pyvenv projectile plantuml-mode ox-reveal org-roam org-bullets nov modus-vivendi-theme modus-operandi-theme magit lsp-ui lsp-python-ms ivy-rtags htmlize geiser-chez flycheck-rust flycheck-rtags flycheck-clj-kondo exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel company-rtags clojure-mode-extra-font-locking clj-refactor avy)))
 (custom-set-faces
