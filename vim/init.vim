@@ -29,17 +29,16 @@ Plug 'w0rp/ale'
 " Finding files
 " Plug 'liuchengxu/vim-clap'
 
-" vim-iced, plugin for Clojure
+" s-exp structural editing
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'liquidz/vim-iced', {'for': 'clojure'}
-Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+
+" vim-iced, plugin for Clojure
+" Plug 'liquidz/vim-iced', {'for': 'clojure'}
+" Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
-" Plug 'Olical/conjure', { 'tag': 'v4.2.0' }
-" Plug 'tpope/vim-dispatch'
-" Plug 'clojure-vim/vim-jack-in'
-" Plug 'radenling/vim-dispatch-neovim'
+Plug 'Olical/conjure'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
@@ -81,11 +80,19 @@ Plug 'bakpakin/fennel.vim'
 " Python black
 Plug 'psf/black', { 'branch': 'stable' }
 
+" org-mode for neo-vim
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-orgmode/orgmode'
+
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
+
+" status line setup (trying airline for now
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Initialize plugin system.
 call plug#end()
