@@ -405,7 +405,7 @@
       c-basic-offset 4)
 
 ;; scheme
-(use-package geiser
+(use-package geiser-guile
   :ensure t)
 
 ;; indentation for js set to two spaces
@@ -434,7 +434,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(default ((t (:foreground "#444444" :background "#FFFFE8"))))
  )
 
 ;;; .emacs ends here
@@ -468,9 +467,3 @@
  '(package-selected-packages
    '(projectile-ripgrep :deadgrep :ripgrep chess zenburn-theme yaml which-key web-mode w3m vterm visual-fill use-package undo-tree treemacs-projectile treemacs-magit treemacs-evil toml-mode tagedit smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pylint powerline-evil phps-mode paper-theme ox-reveal org-roam org-bullets nov nord-theme multi-term monochrome-theme modus-vivendi-theme modus-operandi-theme material-theme mastodon magit-popup lsp-ui lsp-python-ms jenkins jedi-direx ivy-rtags htmlize helm groovy-mode golint go-complete go-autocomplete go geiser-racket geiser-chez flycheck-rust flycheck-rtags flycheck-pyflakes flycheck-plantuml flx-ido exec-path-from-shell evil-surround evil-nerd-commenter evil-collection erlang elpy elixir-yasnippets dracula-theme doom-modeline dockerfile-mode docker-compose-mode django-mode discover deadgrep darkokai-theme cython-mode counsel company-rtags column-enforce-mode clojure-mode-extra-font-locking clj-refactor cider-eval-sexp-fu cframe ccls calfw-gcal calfw auto-org-md android-mode all-the-icons-ivy-rich all-the-icons-ivy alchemist acme-theme))
  '(warning-suppress-types '((org-roam))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
