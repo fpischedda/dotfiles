@@ -56,7 +56,6 @@
   :ensure t
   :bind (( "C-x C-g" . deadgrep)))
 
-
 ;; custom font
 (set-frame-font "Hack-15" nil t)
 
