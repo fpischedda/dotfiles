@@ -212,21 +212,25 @@
          ("\\.restclient\\'" . restclient-mode)
 	 ("\\.http\\'" . restclient-mode)))
 
-(use-package lsp-mode
+(use-package treemacs
   :ensure t
-  :hook
-  ((python-mode . lsp)))
+  :defer t
+  :config
+  (setq treemacs-no-png-images t
+	treemacs-width 24)
+  :bind ("C-c t" . treemacs))
 
-(use-package lsp-ui
+(use-package treemacs-evil
+  :ensure t)
+
+(use-package treemacs-projectile
   :ensure t)
 
 (use-package lsp-mode
   :ensure t
-  :hook ((clojure-mode . lsp)
-	 (clojurescript-mode . lsp)
-	 (clojurec-mpde . lsp))
-
-  :commands lsp
+  :defer t
+  :commands (lsp lsp-deferred)
+  :init (setq lsp-keymap-prefix "C-c l")
 
   :config
   (setq ;; recommended
@@ -236,10 +240,25 @@
    lsp-lens-enable t
    lsp-semantic-tokens-enable t
    cljr-add-ns-to-blank-clj-files nil
-   cider-eldoc-display-for-symbol-at-point nil))
+   cider-eldoc-display-for-symbol-at-point nil)
 
+  :hook ((python-mode . lsp-deferred)
+	 (clojure-mode . lsp-deferred)
+	 (clojurescript-mode . lsp-deferred)
+	 (clojurec-mpde . lsp-deferred)))
+
+;; Provides visual help in the buffer
+;; For example definitions on hover.
+;; The `imenu` lets me browse definitions quickly.
 (use-package lsp-ui
-  :ensure t)
+  :ensure t
+  :defer t
+  :config
+  (setq lsp-ui-sideline-enable nil
+	lsp-ui-doc-delay 2)
+  :hook (lsp-mode . lsp-ui-mode)
+  :bind (:map lsp-ui-mode-map
+	      ("C-c i" . lsp-ui-imenu)))
 
 ;; ;;;; Clojure
 (use-package cider
@@ -462,7 +481,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-export-backends '(ascii html icalendar latex md odt confluence))
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(projectile-ripgrep :deadgrep :ripgrep chess zenburn-theme yaml which-key web-mode w3m vterm visual-fill use-package undo-tree treemacs-projectile treemacs-magit treemacs-evil toml-mode tagedit smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pylint powerline-evil phps-mode paper-theme ox-reveal org-roam org-bullets nov nord-theme multi-term monochrome-theme modus-vivendi-theme modus-operandi-theme material-theme mastodon magit-popup lsp-ui lsp-python-ms jenkins jedi-direx ivy-rtags htmlize helm groovy-mode golint go-complete go-autocomplete go geiser-racket geiser-chez flycheck-rust flycheck-rtags flycheck-pyflakes flycheck-plantuml flx-ido exec-path-from-shell evil-surround evil-nerd-commenter evil-collection erlang elpy elixir-yasnippets dracula-theme doom-modeline dockerfile-mode docker-compose-mode django-mode discover deadgrep darkokai-theme cython-mode counsel company-rtags column-enforce-mode clojure-mode-extra-font-locking clj-refactor cider-eval-sexp-fu cframe ccls calfw-gcal calfw auto-org-md android-mode all-the-icons-ivy-rich all-the-icons-ivy alchemist acme-theme))
+   '(treemacs projectile-ripgrep :deadgrep :ripgrep chess zenburn-theme yaml which-key web-mode w3m visual-fill use-package undo-tree treemacs-projectile treemacs-magit treemacs-evil toml-mode tagedit smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pylint powerline-evil phps-mode paper-theme ox-reveal org-roam org-bullets nov nord-theme multi-term monochrome-theme modus-vivendi-theme modus-operandi-theme material-theme mastodon magit-popup lsp-ui lsp-python-ms jenkins jedi-direx ivy-rtags htmlize helm groovy-mode golint go-complete go-autocomplete go geiser-racket geiser-chez flycheck-rust flycheck-rtags flycheck-pyflakes flycheck-plantuml flx-ido exec-path-from-shell evil-surround evil-nerd-commenter evil-collection erlang elpy elixir-yasnippets dracula-theme doom-modeline dockerfile-mode docker-compose-mode django-mode discover deadgrep darkokai-theme cython-mode counsel company-rtags column-enforce-mode clojure-mode-extra-font-locking clj-refactor cider-eval-sexp-fu cframe ccls calfw-gcal calfw auto-org-md android-mode all-the-icons-ivy-rich all-the-icons-ivy alchemist acme-theme))
  '(warning-suppress-types '((org-roam))))
