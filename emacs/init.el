@@ -64,8 +64,8 @@
   :config (when (memq window-system '(mac ns x))
 	    (exec-path-from-shell-initialize)))
 
-(use-package vterm
-  :ensure t)
+;; (use-package vterm
+;;  :ensure t)
 
 (use-package modus-themes
   :ensure t)
@@ -83,7 +83,7 @@
   (dired-listing-switches "-aBhl --group-directories-first"))
 
 ;; run multi-term pressing F1
-(global-set-key [f1] 'vterm)
+;; (global-set-key [f1] 'vterm)
 
 (use-package smartparens
   :ensure t
