@@ -14,7 +14,7 @@ Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 
 " Fuzzy file finder
-" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Tree view
 Plug 'preservim/nerdtree'
