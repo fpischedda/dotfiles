@@ -88,11 +88,16 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
 
+" Unit testing
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
+Plug 'pineapplegiant/spaceduck'
 
 " status line setup (trying airline for now
 Plug 'vim-airline/vim-airline'
@@ -212,3 +217,10 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 " map CTRL-p to FZF instead of ctrlp plugin
 nnoremap <C-p> :GFiles<Cr>
+
+" vim-test bindings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
