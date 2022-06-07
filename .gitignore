@@ -9,3 +9,10 @@
 
 # Undo-tree save-files
 *.~undo-tree
+/emacs/projectile-bookmarks.eld
+/emacs/bookmarks
+/emacs/cider-history
+/emacs/projects
+/emacs/recentf
+/emacs/transient/
+/emacs/url/
