@@ -98,6 +98,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
 Plug 'romainl/Apprentice'
+Plug 'pineapplegiant/spaceduck'
 
 " status line setup (trying airline for now
 Plug 'vim-airline/vim-airline'
