@@ -84,6 +84,10 @@ Plug 'psf/black', { 'branch': 'stable' }
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'nvim-orgmode/orgmode'
 
+" DAP mode (debugging)
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
@@ -102,7 +106,7 @@ call plug#end()
 " colorscheme apprentice
 set termguicolors
 set background=dark
-colorscheme toast
+colorscheme PaperColor
 
 " Activate rainbow parens
 let g:rainbow_active = 1
