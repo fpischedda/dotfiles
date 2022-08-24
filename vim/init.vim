@@ -21,21 +21,12 @@ Plug 'preservim/nerdtree'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Plug 'ncm2/float-preview.nvim'
+Plug 'ncm2/float-preview.nvim'
 
-" Async Lint Engine
-Plug 'w0rp/ale'
-
-" Finding files
-" Plug 'liuchengxu/vim-clap'
 
 " s-exp structural editing
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-
-" vim-iced, plugin for Clojure
-" Plug 'liquidz/vim-iced', {'for': 'clojure'}
-" Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Conjure, plugin for Clojure/ClojureScript/Fennel/Janet
 Plug 'Olical/conjure'
@@ -69,7 +60,10 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'vhdirk/vim-cmake'
 
 " Test runner
-Plug 'vim-test/vim-test'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
 
 " Terminal
 Plug 'kassio/neoterm'
@@ -80,17 +74,9 @@ Plug 'bakpakin/fennel.vim'
 " Python black
 Plug 'psf/black', { 'branch': 'stable' }
 
-" org-mode for neo-vim
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'nvim-orgmode/orgmode'
-
 " DAP mode (debugging)
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
-
-" Unit testing
-Plug 'vim-test/vim-test'
-Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
@@ -125,10 +111,6 @@ let g:ackprg = 'rg --vimgrep'
 let g:ack_autoclose = 1
 cnoreabbrev Ack Ack!
 
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-" set completeopt-=preview
-
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#max_height = 40
@@ -152,30 +134,6 @@ let g:lsc_auto_map = {
 \  'FindReferences': '<M-r>',
 \}
 " <-- end, c/c++ language server setup with ccls
-
-" For ALE, linters for clojure, cpp, elixir
-let g:ale_linters = {
-      \ 'clojure': ['clj-kondo'],
-      \ 'cpp': ['ccls'],
-      \ 'elixir': ['mix_format']
-      \}
-
-" Vim Clap
-let g:clap_provider_grep_delay = 50
-let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden -g "!.git/"'
-
-nnoremap <leader>* :Clap grep ++query=<cword><cr>
-nnoremap <leader>fg :Clap grep<cr>
-nnoremap <leader>ff :Clap files --hidden<cr>
-nnoremap <leader>fb :Clap buffers<cr>
-nnoremap <leader>fw :Clap windows<cr>
-nnoremap <leader>fr :Clap history<cr>
-nnoremap <leader>fh :Clap command_history<cr>
-nnoremap <leader>fj :Clap jumps<cr>
-nnoremap <leader>fl :Clap blines<cr>
-nnoremap <leader>fL :Clap lines<cr>
-nnoremap <leader>ft :Clap filetypes<cr>
-nnoremap <leader>fm :Clap marks<cr>
 
 " Language server for python
 if executable('pyls')
@@ -218,9 +176,20 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 " map CTRL-p to FZF instead of ctrlp plugin
 nnoremap <C-p> :GFiles<Cr>
 
-" vim-test bindings
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+autocmd FileType python let b:coc_root_patterns = ['.git', 'env', '.env']
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
