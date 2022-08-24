@@ -18,13 +18,8 @@
    (lisp . t)
    (emacs-lisp . t)
    (plantuml . t)
+   (clojure . t)
    (python . t)))
-
-(use-package org-roam
-  :ensure t
-  :config (setq org-roam-directory "~/org"))
-
-(add-hook 'after-init-hook 'org-roam-mode)
 
 ;; used to render code snippets when exporting org files
 (use-package htmlize
@@ -33,10 +28,6 @@
 (use-package ox-reveal
   :ensure t
   :init (setq org-reveal-root "file:///~/reveal.js"))
-
-(use-package org-bullets
-  :ensure t
-  :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
 (setq org-agenda-files (list "~/org/work.org"
                              "~/org/agenda.org"

@@ -88,3 +88,16 @@
 (load-file "~/.emacs.d/post-startup-cleanup.el")
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(treemacs-projectile treemacs-evil treemacs which-key vterm visual-fill use-package toml-mode smartparens slime restclient restart-emacs ranger rainbow-delimiters pyvenv projectile-ripgrep plantuml-mode ox-reveal org-roam org-bullets nov modus-themes magit lsp-ui lsp-python-ms htmlize geiser-guile flycheck exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel clojure-mode-extra-font-locking clj-refactor chess all-the-icons)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

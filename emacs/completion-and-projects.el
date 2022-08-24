@@ -31,7 +31,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-globally-ignored-files-suffixes '("pyc" "class" "obj"))
-  (setq projectile-globally-ignored-directories '("*.git" "*.projectile" "*build" "*env" "*env2" "*.shadow-cljs" "*.cache" "*__pycache__"))
+  (setq projectile-globally-ignored-directories '("*.git" "*.projectile" "*build" "*env" "*env2" "*.shadow-cljs" "*.cache" "*__pycache__" "*.cpcache" "*.clj-kondo"))
   (setq projectile-sort-order 'modification-time)
   (setq projectile-project-search-path '("~/work/" "~/works/" "~/quicklisp/local-projects"))
   (projectile-mode +1))

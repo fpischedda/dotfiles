@@ -36,6 +36,7 @@
   :mode
 ;; Use clojure mode for other file extensions
   (("\\.edn$" . clojure-mode)
+   ("\\.bb$" . clojure-mode)
    ("\\.boot$" . clojure-mode)))
 
 ;; A little more syntax highlighting
