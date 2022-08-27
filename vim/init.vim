@@ -1,8 +1,7 @@
 " Specify a directory for plugins.
 call plug#begin(stdpath('data') . '/plugged')
 
-" Specify your required plugins here.
-
+" General dependencies
 Plug 'liuchengxu/vim-better-default'
 
 Plug 'easymotion/vim-easymotion'
@@ -10,11 +9,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'luochen1990/rainbow'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+
 " Frontend to ripgrep
 Plug 'mileszs/ack.vim'
 
 " Fuzzy file finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 " Tree view
 Plug 'preservim/nerdtree'
@@ -25,9 +28,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Async Lint Engine
 Plug 'w0rp/ale'
-
-" Finding files
-" Plug 'liuchengxu/vim-clap'
 
 " s-exp structural editing
 Plug 'guns/vim-sexp'
@@ -69,7 +69,9 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'vhdirk/vim-cmake'
 
 " Test runner
-Plug 'vim-test/vim-test'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-python'
 
 " Terminal
 Plug 'kassio/neoterm'
@@ -88,6 +90,9 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
 
+" Better motions
+Plug 'easymotion/vim-easymotion'
+
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'arcticicestudio/nord-vim'
@@ -98,7 +103,12 @@ Plug 'romainl/Apprentice'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Nice icons
+Plug 'ryanoasis/vim-devicons'
+
 " Initialize plugin system.
+let g:python3_host_prog = '/home/foca/.venvs/neovim/bin/python3'
+
 call plug#end()
 
 " colorscheme PaperColor
@@ -155,23 +165,6 @@ let g:ale_linters = {
       \ 'elixir': ['mix_format']
       \}
 
-" Vim Clap
-let g:clap_provider_grep_delay = 50
-let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden -g "!.git/"'
-
-nnoremap <leader>* :Clap grep ++query=<cword><cr>
-nnoremap <leader>fg :Clap grep<cr>
-nnoremap <leader>ff :Clap files --hidden<cr>
-nnoremap <leader>fb :Clap buffers<cr>
-nnoremap <leader>fw :Clap windows<cr>
-nnoremap <leader>fr :Clap history<cr>
-nnoremap <leader>fh :Clap command_history<cr>
-nnoremap <leader>fj :Clap jumps<cr>
-nnoremap <leader>fl :Clap blines<cr>
-nnoremap <leader>fL :Clap lines<cr>
-nnoremap <leader>ft :Clap filetypes<cr>
-nnoremap <leader>fm :Clap marks<cr>
-
 " Language server for python
 if executable('pyls')
     " pip install python-language-server
@@ -200,6 +193,7 @@ set secure
 " run black infile save
 autocmd BufWritePre *.py execute ':Black'
 let maplocalleader = ","
+let mapleader = ","
 
 " Tell vim-iced to use <LocalLeader>
 let g:iced_enable_default_key_mappings = v:true
@@ -210,5 +204,12 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
-" map CTRL-p to FZF instead of ctrlp plugin
-nnoremap <C-p> :GFiles<Cr>
+" [DISABLED] map CTRL-p to FZF instead of ctrlp plugin
+" nnoremap <C-p> :GFiles<Cr>
+
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
