@@ -16,7 +16,7 @@
   (setq ;; optional
    lsp-lens-enable t
    lsp-semantic-tokens-enable t
-   cljr-add-ns-to-blank-clj-files nil
+   cljr-add-ns-to-blank-clj-files t
    cider-eldoc-display-for-symbol-at-point nil)
 
   :hook ((python-mode . lsp-deferred)

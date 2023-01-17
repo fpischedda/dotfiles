@@ -26,6 +26,9 @@
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
 ;; Wrap when navigating history.
   (setq cider-repl-wrap-history t)
+  (setq ;; optional
+   cljr-add-ns-to-blank-clj-files t
+   cider-eldoc-display-for-symbol-at-point nil)
   :bind (("C-." . cider-docview-source)))
 
 ;; (use-package flycheck-clj-kondo

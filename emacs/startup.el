@@ -29,7 +29,7 @@
 (package-initialize)
 
 ;; custom font
-(set-frame-font "Hack-15" nil t)
+(set-frame-font "Hack-14" nil t)
 
 (use-package exec-path-from-shell
   :ensure t

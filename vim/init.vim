@@ -14,7 +14,9 @@ Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 
 " Fuzzy file finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 " Tree view
 Plug 'preservim/nerdtree'
@@ -60,7 +62,6 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'vhdirk/vim-cmake'
 
 " Test runner
-Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
@@ -89,8 +90,14 @@ Plug 'pineapplegiant/spaceduck'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Zig
+Plug 'ziglang/zig.vim'
+
 " Initialize plugin system.
 call plug#end()
+
+let maplocalleader = ","
+let maplleader = ","
 
 " colorscheme PaperColor
 " colorscheme gruvbox
@@ -103,8 +110,8 @@ colorscheme PaperColor
 let g:rainbow_active = 1
 
 " ctrlp customization
-let g:ctrlp_root_markers = ['deps.edn']
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" let g:ctrlp_root_markers = ['deps.edn']
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " ack.vim customization to use ripgrep
 let g:ackprg = 'rg --vimgrep'
@@ -162,10 +169,7 @@ set secure
 
 " run black infile save
 autocmd BufWritePre *.py execute ':Black'
-let maplocalleader = ","
 
-" Tell vim-iced to use <LocalLeader>
-let g:iced_enable_default_key_mappings = v:true
 
 " Bindings for NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -174,7 +178,14 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
 " map CTRL-p to FZF instead of ctrlp plugin
-nnoremap <C-p> :GFiles<Cr>
+" nnoremap <C-p> :GFiles<Cr>
+
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 autocmd FileType python let b:coc_root_patterns = ['.git', 'env', '.env']
 
