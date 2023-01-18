@@ -68,6 +68,7 @@
 
 (use-package evil
   :ensure t
+  :init (setq evil-want-keybinding nil)
   :config (evil-mode 1))
 
 (use-package evil-collection
@@ -77,7 +78,11 @@
 
 (use-package paredit
   :ensure t
-  :init (paredit-mode))
+  :config (paredit-mode 1)
+  :bind (("C->" . paredit-forward-slurp-sexp)
+	 ("C-M->" . paredit-forward-barf-sexp)
+	 ("C-<" . paredit-backward-barf-sexp)
+	 ("C-M-<" . paredit-backword-slurp-sexp)))
 
 (use-package emacs
   :ensure nil
