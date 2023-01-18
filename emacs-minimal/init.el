@@ -35,9 +35,6 @@
   :init
   (which-key-mode))
 
-(use-package cider
-  :ensure t)
-
 (use-package modus-themes
   :ensure t)
 
@@ -55,6 +52,28 @@
   (setq project-switch-commands 'project-dired)
   :bind-keymap
   (("C-c p" . project-prefix-map)))
+
+(use-package eglot
+  :ensure t)
+
+(use-package clojure-mode
+  :after eglot
+  :ensure t
+  :hook (clojure-mode . eglot-ensure))
+  
+(use-package cider
+  :after clojure-mode
+  :ensure t
+  :init ())
+
+(use-package evil
+  :ensure t
+  :config (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config (evil-collection-init))
 
 (use-package emacs
   :ensure nil
