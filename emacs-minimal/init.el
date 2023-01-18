@@ -75,6 +75,10 @@
   :ensure t
   :config (evil-collection-init))
 
+(use-package paredit
+  :ensure t
+  :init (paredit-mode))
+
 (use-package emacs
   :ensure nil
   :config
