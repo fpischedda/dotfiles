@@ -18,7 +18,6 @@
 (show-paren-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (setq default-frame-alist '((fullscreen . maximized)))
@@ -29,7 +28,7 @@
 (package-initialize)
 
 ;; custom font
-(set-frame-font "Hack-15" nil t)
+(set-frame-font "Hack-14" nil t)
 
 (use-package exec-path-from-shell
   :ensure t
