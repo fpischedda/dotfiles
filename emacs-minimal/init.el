@@ -30,6 +30,10 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+(use-package rainbow-delimiters
+  :ensure t
+  :hook prog-mode)
+
 (use-package which-key
   :ensure t
   :init
@@ -76,8 +80,15 @@
   :ensure t
   :config (evil-collection-init))
 
+(use-package evil-surround
+  :after evil
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
 (use-package paredit
   :ensure t
+  :hook prog-mode
   :config (paredit-mode 1)
   :bind (("C->" . paredit-forward-slurp-sexp)
 	 ("C-M->" . paredit-forward-barf-sexp)
@@ -87,10 +98,13 @@
 (use-package emacs
   :ensure nil
   :config
+  (setq make-backup-files nil) ; stop creating ~ files
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (line-number-mode t)
+  (global-display-line-numbers-mode)
+  (enable-paredit-mode)
   (load-theme 'modus-vivendi)
-  (global-set-key (kbd "C-c s") 'g-eshell))
+  (global-set-key (kbd "C-c s") 'g-eshell)
+  )
