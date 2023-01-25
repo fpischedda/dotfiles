@@ -6,7 +6,7 @@
 (use-package doom-modeline
       :ensure t
       :defer t
-      :hook (after-init . doom-modeline-init))
+      :hook (after-init . doom-modeline-mode))
 
 ; redifine some modeline
 (defmacro rename-modeline (package-name mode new-name)
