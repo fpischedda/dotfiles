@@ -24,8 +24,6 @@
   :ensure t
   :config (setq org-roam-directory "~/org"))
 
-(add-hook 'after-init-hook 'org-roam-mode)
-
 ;; used to render code snippets when exporting org files
 (use-package htmlize
   :ensure t)
