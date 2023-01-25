@@ -17,13 +17,20 @@
 
 (load-file "~/.emacs.d/clojure.el")
 
-(load-file "~/.emacs.d/lsp.el")
+;; (load-file "~/.emacs.d/lsp.el")
+
+(load-file "~/.emacs.d/eglot.el")
 
 (load-file "~/.emacs.d/treemacs.el")
 
 (load-file "~/.emacs.d/org.el")
 
 (load-file "~/.emacs.d/completion-and-projects.el")
+
+;;; direnv to load project specific env settings
+(use-package direnv
+ :config
+ (direnv-mode))
 
 ;;; Languages tweaks and extra modes
 ;; JS
@@ -88,3 +95,16 @@
 (load-file "~/.emacs.d/post-startup-cleanup.el")
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(direnv which-key vterm visual-fill use-package treemacs-projectile treemacs-evil toml-mode smartparens slime rust-mode restclient restart-emacs ranger rainbow-delimiters pyvenv plantuml-mode ox-reveal org-roam org-bullets nov modus-vivendi-theme modus-operandi-theme magit lsp-ui lsp-python-ms ivy-rtags htmlize geiser-guile geiser-chez flycheck-rust flycheck-rtags exec-path-from-shell evil-surround evil-nerd-commenter evil-collection doom-modeline dockerfile-mode docker-compose-mode deadgrep counsel company-rtags clojure-mode-extra-font-locking clj-refactor all-the-icons)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
