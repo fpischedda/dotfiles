@@ -30,6 +30,17 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+(use-package corfu
+  :ensure t
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-separator ?\s)          ;; Orderless field separator
+
+  :init
+  (global-corfu-mode))
+
 (use-package rainbow-delimiters
   :ensure t
   :hook prog-mode)
@@ -101,10 +112,13 @@
   (setq make-backup-files nil) ; stop creating ~ files
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
+  (load-theme 'modus-vivendi)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-display-line-numbers-mode)
   (enable-paredit-mode)
-  (load-theme 'modus-vivendi)
   (global-set-key (kbd "C-c s") 'g-eshell)
+  (setq completion-cycle-threshold 3)
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
   )
