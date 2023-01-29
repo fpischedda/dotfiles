@@ -97,6 +97,7 @@
 
 (use-package evil
   :ensure t
+  :bind (("C-u" . evil-scroll-up))
   :init (setq evil-want-keybinding nil)
   :config (evil-mode 1))
 
