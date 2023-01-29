@@ -30,16 +30,30 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package corfu
-  :ensure t
-  ;; Optional customizations
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-separator ?\s)          ;; Orderless field separator
+(defun customize-corfu ()
+  (corfu-cycle t)	;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)	;; Enable auto completion
+  (corfu-separator ?\s)	;; Orderless field separator
+  )
 
-  :init
-  (global-corfu-mode))
+(if (display-graphic-p)
+    (use-package corfu
+      :ensure t
+      ;; Optional customizations
+      :custom
+      (customize-corfu)
+
+      :init
+      (global-corfu-mode))
+
+  (use-package corfu-terminal
+    :ensure t
+    ;; Optional customizations
+    :custom
+    (customize-corfu)
+
+    :init
+    (corfu-terminal-mode)))
 
 (use-package rainbow-delimiters
   :ensure t
