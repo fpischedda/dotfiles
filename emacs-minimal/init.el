@@ -98,8 +98,7 @@
 (use-package evil
   :ensure t
   :bind (("C-u" . evil-scroll-up))
-  :init (setq evil-want-keybinding nil)
-  :config (evil-mode 1))
+  :init (setq evil-want-keybinding nil))
 
 (use-package evil-collection
   :after evil
@@ -136,4 +135,5 @@
   (setq completion-cycle-threshold 3)
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
+  (evil-mode 1)
   )
