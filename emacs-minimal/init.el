@@ -120,10 +120,14 @@
 	 ("C-<" . paredit-backward-barf-sexp)
 	 ("C-M-<" . paredit-backword-slurp-sexp)))
 
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
+
 (use-package emacs
   :ensure nil
   :config
-  (setq make-backup-files nil) ; stop creating ~ files
+  (setq make-backup-files nil)		; stop creating ~ files
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
   (load-theme 'modus-vivendi)
