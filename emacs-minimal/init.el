@@ -88,7 +88,8 @@
 (use-package clojure-mode
   :after eglot
   :ensure t
-  :hook (clojure-mode . eglot-ensure))
+  :hook ((clojure-mode . eglot-ensure)
+	 (javascript-mode . eglot-ensure)))
   
 (use-package cider
   :after clojure-mode
@@ -148,4 +149,6 @@
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
   (evil-mode 1)
+
+  (setq js-indent-level 2)
   )
