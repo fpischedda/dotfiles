@@ -124,9 +124,17 @@
   :ensure t
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
+(use-package dap-mode
+  :ensure t)
+
+(use-package zig-mode
+  :ensure t)
+
 (use-package emacs
   :ensure nil
   :config
+  ;; custom font
+  (set-frame-font "Hack-14" nil t)
   (setq make-backup-files nil)		; stop creating ~ files
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
