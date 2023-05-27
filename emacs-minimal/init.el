@@ -2,9 +2,6 @@
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-(use-package magit
-  :ensure t)
-
 (use-package vertico
   :ensure t
   :custom
@@ -104,13 +101,24 @@
 (use-package evil-collection
   :after evil
   :ensure t
-  :config (evil-collection-init))
+  :config
+  (evil-collection-init)
+  (evil-mode 1))
 
 (use-package evil-surround
   :after evil
   :ensure t
   :config
   (global-evil-surround-mode 1))
+
+(use-package undo-tree
+  :ensure t
+  :after evil
+  :diminish
+  :config
+  (evil-set-undo-system 'undo-tree)
+  (global-undo-tree-mode 1)
+  (setq undo-tree-auto-save-history nil))
 
 (use-package paredit
   :ensure t
@@ -125,10 +133,26 @@
   :ensure t
   :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
+(use-package ox-haunt
+  :ensure t
+  :after org)
+
+(with-eval-after-load 'ox
+  (require 'ox-haunt))
+
+(use-package ob-mermaid
+  :ensure t
+  :after org
+  :config
+  (setq ob-mermaid-cli-path "/home/foca/.nvm/versions/node/v19.6.0/bin/mmdc"))
+
 (use-package dap-mode
   :ensure t)
 
 (use-package zig-mode
+  :ensure t)
+
+(use-package magit
   :ensure t)
 
 (use-package emacs
@@ -136,6 +160,11 @@
   :config
   (setq make-backup-files nil)		; stop creating ~ files
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  ;; custom font
+  (set-frame-font "Hack-14" nil t)
+
+  (setq js-indent-level 2)
+
   (load custom-file)
   (load-theme 'modus-vivendi)
   (tool-bar-mode -1)
@@ -146,9 +175,4 @@
   (setq completion-cycle-threshold 3)
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
-  (evil-mode 1)
-
-  (setq js-indent-level 2)
-  ;; custom font
-  (set-frame-font "Hack-16" nil t)
   )
