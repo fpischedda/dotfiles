@@ -138,9 +138,7 @@
   :ensure t
   :bind (("C-u" . evil-scroll-up))
   :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
+  (setq evil-want-keybinding nil))
 
 (use-package evil-collection
   :after evil
@@ -166,16 +164,17 @@
 (use-package emacs
   :ensure nil
   :config
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (load custom-file)
+  (load-theme 'modus-operandi)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (setq make-backup-files nil)		; stop creating ~ files
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   ;; custom font
   (set-frame-font "Hack-12" nil t)
 
   (setq js-indent-level 2)
+  (setq-default css-indent-offset 2)
 
-  (load custom-file)
-  (load-theme 'modus-operandi)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-display-line-numbers-mode)
@@ -184,4 +183,6 @@
   (setq completion-cycle-threshold 3)
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
+
+  (evil-mode 1)
   )
