@@ -94,7 +94,10 @@
 (use-package cider
   :after clojure-mode
   :ensure t
-  :init ())
+  :config
+  (setq cider-eldoc-display-for-symbol-at-point nil)
+  (remove-hook 'eldoc-documentation-functions #'cider-eldoc)
+  (cider-auto-test-mode 1))
 
 (use-package paredit
   :ensure t
