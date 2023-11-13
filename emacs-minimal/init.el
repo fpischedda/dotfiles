@@ -85,7 +85,8 @@
 (use-package eglot
   :ensure t
   :hook ((clojure-mode . eglot-ensure)
-	 (javascript-mode . eglot-ensure))
+	 (javascript-mode . eglot-ensure)
+	 (python-mode . eglot-ensure)))
 
 (use-package clojure-mode
   :after eglot
@@ -127,35 +128,6 @@
 (use-package geiser-guile
   :ensure t
   :after geiser)
-
-(use-package visual-fill-column
-  :ensure t
-  :config
-  (setq visual-fill-column-width 110
-	visual-fill-column-center-text t))
-
-(use-package org-present
-  :ensure t
-  :after org-mode)
-
-;; Configure fill width
-
-(defun my/org-present-start ()
-  ;; Center the presentation and wrap lines
-  (visual-fill-column-mode 1)
-  (visual-line-mode 1)
-  (global-display-line-numbers-mode nil))
-
-(defun my/org-present-end ()
-  ;; Stop centering the document
-  (visual-fill-column-mode 0)
-  (visual-line-mode 0)
-  (global-display-line-numbers-mode))
-
-;; Register hooks with org-present
-(add-hook 'org-present-mode-hook 'my/org-present-start)
-
-(add-hook 'org-present-mode-quit-hook 'my/org-present-end)
 
 (use-package exec-path-from-shell
   :ensure t
