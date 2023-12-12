@@ -115,7 +115,7 @@
 
 (use-package project
   :config
-  (setq project-switch-commands 'project-dired)
+  (setq project-switch-commands 'project-find-file)
   :bind-keymap
   (("C-c p" . project-prefix-map)))
 
