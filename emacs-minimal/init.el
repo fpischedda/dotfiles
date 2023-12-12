@@ -5,6 +5,36 @@
 (use-package magit
   :ensure t)
 
+(defun customize-corfu ()
+  (setq
+   corfu-cycle t	;; Enable cycling for `corfu-next/previous'
+   corfu-auto t	;; Enable auto completion
+   corfu-quit-no-match 'separator
+   corfu-auto-prefix 2
+   corfu-auto-delay 0.0
+   corfu-preselect-first nil
+   corfu-separator ?\s)	;; Orderless field separator
+  )
+
+(if (display-graphic-p)
+  (use-package corfu
+    :ensure t
+    ;; Optional customizations
+    :custom
+    (customize-corfu)
+
+    :init
+    (global-corfu-mode))
+
+  (use-package corfu-terminal
+    :ensure t
+    ;; Optional customizations
+    :custom
+    (customize-corfu)
+
+    :init
+    (corfu-terminal-mode)))
+
 (use-package vertico
   :ensure t
   :custom
@@ -30,30 +60,37 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(defun customize-corfu ()
-  (corfu-cycle t)	;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)	;; Enable auto completion
-  (corfu-separator ?\s)	;; Orderless field separator
-  )
-
-(if (display-graphic-p)
-  (use-package corfu
-    :ensure t
-    ;; Optional customizations
-    :custom
-    (customize-corfu)
-
-    :init
-    (global-corfu-mode))
-
-  (use-package corfu-terminal
-    :ensure t
-    ;; Optional customizations
-    :custom
-    (customize-corfu)
-
-    :init
-    (corfu-terminal-mode)))
+;; Add extensions
+(use-package cape
+  :ensure t
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  :bind (("M-p p" . completion-at-point) ;; capf
+         ("M-p t" . complete-tag)        ;; etags
+         ("M-p d" . cape-dabbrev)        ;; or dabbrev-completion
+         ("M-p h" . cape-history)
+         ("M-p f" . cape-file)
+         ("M-p k" . cape-keyword)
+         ("M-p s" . cape-elisp-symbol)
+         ("M-p e" . cape-elisp-block)
+         ("M-p a" . cape-abbrev)
+         ("M-p l" . cape-line)
+         ("M-p w" . cape-dict)
+         ("M-p :" . cape-emoji)
+         ("M-p \\" . cape-tex)
+         ("M-p _" . cape-tex)
+         ("M-p ^" . cape-tex)
+         ("M-p &" . cape-sgml)
+         ("M-p r" . cape-rfc1345))
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+)
 
 (use-package rainbow-delimiters
   :ensure t
@@ -85,8 +122,8 @@
 (use-package eglot
   :ensure t
   :hook ((clojure-mode . eglot-ensure)
-	 (javascript-mode . eglot-ensure)
-	 (python-mode . eglot-ensure)))
+	 (python-mode . eglot-ensure)
+	 (javascript-mode . eglot-ensure)))
 
 (use-package clojure-mode
   :after eglot
