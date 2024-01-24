@@ -223,3 +223,16 @@
 
   (evil-mode 1)
   )
+
+(defun get-local-secret (name)
+  (substring 
+   (shell-command-to-string (format "pass %s" name)) 
+    0 -1))
+
+(setq erc-email-userid "fpsd_codes/irc.libera.chat") ;; Example with Libera.Chat
+(defun run-erc ()
+  (interactive)
+  (erc-tls :server "chat.sr.ht"
+           :port 6697
+           :nick "fpsd_codes"
+           :password (get-local-secret "srht/fpsd_codes/access_token")))
