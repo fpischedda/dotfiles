@@ -5,6 +5,13 @@
 (use-package magit
   :ensure t)
 
+;; Fix path
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 (defun customize-corfu ()
   (setq
    corfu-cycle t	;; Enable cycling for `corfu-next/previous'
@@ -119,11 +126,46 @@
   :bind-keymap
   (("C-c p" . project-prefix-map)))
 
+;; Reference post
+;; https://www.adventuresinwhy.com/post/eglot/
+(defun configure-lsp ()
+  (setq-default eglot-workspace-configuration
+                '((:pylsp . (:configurationSources ["flake8"]
+						   :plugins (
+							     :pycodestyle (:enabled :json-false)
+							     :mccabe (:enabled :json-false)
+							     :pyflakes (:enabled :json-false)
+							     :flake8 (:enabled :json-false
+									       :maxLineLength 88)
+							     :ruff (:enabled t
+									     :lineLength 88)
+							     :pydocstyle (:enabled t
+										   :convention "numpy")
+							     :yapf (:enabled :json-false)
+							     :autopep8 (:enabled :json-false)
+							     :black (:enabled t
+									      :line_length 88
+									      :cache_config t)))))))
+
 (use-package eglot
   :ensure t
+  :defer t
+  :bind (:map eglot-mode-map
+	      ("C-c C-d" . eldoc)
+	      ("C-c C-e" . eglot-rename)
+	      ("C-c C-o" . python-sort-imports)
+	      ("C-c C-f" . eglot-format-buffer))
+
   :hook ((clojure-mode . eglot-ensure)
+	 (javascript-mode . eglot-ensure)
+	 (elisp-mode . eglot-ensure)
 	 (python-mode . eglot-ensure)
-	 (javascript-mode . eglot-ensure)))
+	 (python-mode . eglot-ensure)
+	 (python-mode . flyspell-prog-mode)
+         (python-mode . superword-mode)
+         (python-mode . hs-minor-mode)
+         (python-mode . (lambda () (set-fill-column 88))))
+  :config (configure-lsp))
 
 (use-package clojure-mode
   :after eglot
