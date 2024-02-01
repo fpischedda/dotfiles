@@ -151,6 +151,9 @@
 									      :line_length 88
 									      :cache_config t)))))))
 
+;; Open python files in tree-sitter mode.
+(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+
 (use-package eglot
   :ensure t
   :defer t
@@ -163,12 +166,12 @@
   :hook ((clojure-mode . eglot-ensure)
 	 (javascript-mode . eglot-ensure)
 	 (elisp-mode . eglot-ensure)
-	 (python-mode . eglot-ensure)
-	 (python-mode . eglot-ensure)
-	 (python-mode . flyspell-prog-mode)
-         (python-mode . superword-mode)
-         (python-mode . hs-minor-mode)
-         (python-mode . (lambda () (set-fill-column 88))))
+	 (python-ts-mode . eglot-ensure)
+	 (python-ts-mode . eglot-ensure)
+	 (python-ts-mode . flyspell-prog-mode)
+         (python-ts-mode . superword-mode)
+         (python-ts-mode . hs-minor-mode)
+         (python-ts-mode . (lambda () (set-fill-column 88))))
   :config (configure-lsp))
 
 (use-package clojure-mode
