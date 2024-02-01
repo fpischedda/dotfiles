@@ -99,6 +99,10 @@
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
 )
 
+(use-package consult
+  :ensure t
+  :config (advice-add #'project-find-regexp :override #'consult-ripgrep))
+
 (use-package rainbow-delimiters
   :ensure t
   :hook prog-mode)
@@ -207,11 +211,6 @@
 (use-package geiser-guile
   :ensure t
   :after geiser)
-
-(use-package exec-path-from-shell
-  :ensure t
-  :init (when (memq window-system '(mac ns x))
-	  (exec-path-from-shell-initialize)))
 
 (use-package evil
   :ensure t
