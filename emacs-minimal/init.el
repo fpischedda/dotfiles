@@ -24,14 +24,14 @@
   )
 
 (if (display-graphic-p)
-  (use-package corfu
-    :ensure t
-    ;; Optional customizations
-    :custom
-    (customize-corfu)
+    (use-package corfu
+      :ensure t
+      ;; Optional customizations
+      :custom
+      (customize-corfu)
 
-    :init
-    (global-corfu-mode))
+      :init
+      (global-corfu-mode))
 
   (use-package corfu-terminal
     :ensure t
@@ -97,7 +97,7 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-)
+  )
 
 (use-package consult
   :ensure t
@@ -135,21 +135,16 @@
 (defun configure-lsp ()
   (setq-default eglot-workspace-configuration
                 '((:pylsp . (:configurationSources ["flake8"]
-						   :plugins (
-							     :pycodestyle (:enabled :json-false)
-							     :mccabe (:enabled :json-false)
-							     :pyflakes (:enabled :json-false)
-							     :flake8 (:enabled :json-false
-									       :maxLineLength 88)
-							     :ruff (:enabled t
-									     :lineLength 88)
-							     :pydocstyle (:enabled t
-										   :convention "numpy")
-							     :yapf (:enabled :json-false)
-							     :autopep8 (:enabled :json-false)
-							     :black (:enabled t
-									      :line_length 88
-									      :cache_config t)))))))
+                                                   :plugins (
+                                                             :pycodestyle (:enabled :json-false)
+                                                             :mccabe (:enabled :json-false)
+                                                             :pyflakes (:enabled :json-false)
+                                                             :flake8 (:enabled :json-false :maxLineLength 88)
+                                                             :ruff (:enabled t :lineLength 88)
+                                                             :pydocstyle (:enabled t :convention "numpy")
+                                                             :yapf (:enabled :json-false)
+                                                             :autopep8 (:enabled :json-false)
+                                                             :black (:enabled t :line_length 88 :cache_config t)))))))
 
 ;; Open python files in tree-sitter mode.
 (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
@@ -165,11 +160,9 @@
 
   :hook ((clojure-mode . eglot-ensure)
 	 (javascript-mode . eglot-ensure)
-	 (elisp-mode . eglot-ensure)
 	 (python-ts-mode . eglot-ensure)
 	 (python-ts-mode . eglot-ensure)
 	 (python-ts-mode . flyspell-prog-mode)
-         (python-ts-mode . superword-mode)
          (python-ts-mode . hs-minor-mode)
          (python-ts-mode . (lambda () (set-fill-column 88))))
   :config (configure-lsp))
@@ -242,6 +235,11 @@
   (global-undo-tree-mode 1)
   (setq undo-tree-auto-save-history nil))
 
+(use-package apheleia
+  :ensure t
+  :config
+  (apheleia-global-mode +1))
+
 (use-package emacs
   :ensure nil
   :config
@@ -251,7 +249,7 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (setq make-backup-files nil)		; stop creating ~ files
   ;; custom font
-  (set-frame-font "Hack-12" nil t)
+  (set-frame-font "Hack-14" nil t)
 
   (setq js-indent-level 2)
   (setq-default css-indent-offset 2)
@@ -271,7 +269,7 @@
 (defun get-local-secret (name)
   (substring 
    (shell-command-to-string (format "pass %s" name)) 
-    0 -1))
+   0 -1))
 
 (setq erc-email-userid "fpsd_codes/irc.libera.chat") ;; Example with Libera.Chat
 (defun run-erc ()
