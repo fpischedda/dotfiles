@@ -85,7 +85,8 @@ local plugins = {
       },
     },
   },
-  { "kdheepak/lazygit.nvim",
+  {
+    "kdheepak/lazygit.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
@@ -98,6 +99,16 @@ local plugins = {
     config = function(_, opts)
       require("telescope").load_extension("lazygit")
     end,
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
   },
 }
 

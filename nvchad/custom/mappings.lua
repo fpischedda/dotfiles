@@ -3,6 +3,7 @@ local M = {}
 M.general = {
   n = {
     ["<leader>gg"] = {"<cmd> LazyGit <CR>", "LazyGit"},
+    ["<leader><leader>"] = {"<cmd> Lazy <CR>", "LazyVim"},
     ["[d"] = {vim.diagnostic.goto_prev, "Go to prev error"},
     ["]d"] = {vim.diagnostic.goto_next, "Go to next error"},
   }
