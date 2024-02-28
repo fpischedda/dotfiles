@@ -2,13 +2,7 @@ local M = {}
 
 M.general = {
   n = {
-    ["<leader>gg"] = {
-      function()
-        local term = require("nvterm.terminal").new("float")
-        vim.api.nvim_chan_send(term.job_id, "lazygit\nexit\n")
-      end,
-      "open Lazygit",
-    },
+    ["<leader>gg"] = {"<cmd> LazyGit <CR>", "LazyGit"},
     ["[d"] = {vim.diagnostic.goto_prev, "Go to prev error"},
     ["]d"] = {vim.diagnostic.goto_next, "Go to next error"},
   }

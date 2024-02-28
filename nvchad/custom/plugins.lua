@@ -77,7 +77,6 @@ local plugins = {
         "lua-language-server",
         "html-lsp",
         "css-lsp",
-        "prettier",
         "stylua",
         "clojure-lsp",
         "pyright",
@@ -85,7 +84,21 @@ local plugins = {
         "zls"
       },
     },
-  }
+  },
+  { "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    lazy = false,
+    opts = {
+      lazygit_use_custom_config_file_path = 1,
+      lazygit_config_file_path = "~/.config/lazygit/config.yml",
+    },
+    config = function(_, opts)
+      require("telescope").load_extension("lazygit")
+    end,
+  },
 }
 
 return plugins
