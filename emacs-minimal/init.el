@@ -49,6 +49,10 @@
   :init
   (vertico-mode))
 
+(use-package vertico-posframe
+  :ensure t
+  :init (vertico-posframe-mode 1))
+
 (use-package savehist
   :init
   (savehist-mode))
