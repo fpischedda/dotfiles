@@ -81,6 +81,7 @@ local plugins = {
         "clojure-lsp",
         "pyright",
         "ruff-lsp",
+        "python-lsp-server",
         "zls"
       },
     },

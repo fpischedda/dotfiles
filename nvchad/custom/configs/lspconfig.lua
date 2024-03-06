@@ -3,7 +3,7 @@ local on_attach = configs.on_attach
 local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "lua_ls", "html", "pyright", "clojure_lsp", "ruff_lsp", "cssls", "zls"}
+local servers = { "lua_ls", "html", "pylsp", "clojure_lsp", "cssls", "zls"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
