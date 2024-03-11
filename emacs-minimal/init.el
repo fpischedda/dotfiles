@@ -244,6 +244,14 @@
   :config
   (apheleia-global-mode +1))
 
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 (use-package emacs
   :ensure nil
   :config
@@ -276,6 +284,7 @@
    0 -1))
 
 (setq erc-email-userid "fpsd_codes/irc.libera.chat") ;; Example with Libera.Chat
+
 (defun run-erc ()
   (interactive)
   (erc-tls :server "chat.sr.ht"
