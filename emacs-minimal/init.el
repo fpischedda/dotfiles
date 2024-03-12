@@ -47,13 +47,13 @@
   :custom
   (verticle-cycle t)
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :config
+  (setq vertico-count 35))
 
 (use-package vertico-posframe
   :ensure t
-  :init (vertico-posframe-mode 1)
-  :config
-  (setq vertico-posframe-height 35))
+  :init (vertico-posframe-mode 1))
 
 (use-package savehist
   :init
@@ -140,17 +140,17 @@
 ;; https://www.adventuresinwhy.com/post/eglot/
 (defun configure-lsp ()
   (setq-default eglot-workspace-configuration
-                '((:pylsp . (:configurationSources ["flake8"]
-                                                   :plugins (
-                                                             :pycodestyle (:enabled :json-false)
-                                                             :mccabe (:enabled :json-false)
-                                                             :pyflakes (:enabled :json-false)
-                                                             :flake8 (:enabled :json-false :maxLineLength 88)
-                                                             :ruff (:enabled t :lineLength 88)
-                                                             :pydocstyle (:enabled t :convention "numpy")
-                                                             :yapf (:enabled :json-false)
-                                                             :autopep8 (:enabled :json-false)
-                                                             :black (:enabled t :line_length 88 :cache_config t)))))))
+                '((:pylsp . (:configurationSources
+			     ["flake8"]
+			     :plugins (:pycodestyle (:enabled :json-false)
+						    :mccabe (:enabled :json-false)
+						    :pyflakes (:enabled :json-false)
+						    :flake8 (:enabled :json-false :maxLineLength 88)
+						    :ruff (:enabled t :lineLength 88)
+						    :pydocstyle (:enabled t :convention "numpy")
+						    :yapf (:enabled :json-false)
+						    :autopep8 (:enabled :json-false)
+						    :black (:enabled t :line_length 88 :cache_config t)))))))
 
 ;; Open python files in tree-sitter mode.
 (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
@@ -164,18 +164,21 @@
 	      ("C-c C-o" . python-sort-imports)
 	      ("C-c C-f" . eglot-format-buffer))
 
-  :hook ((clojure-mode . eglot-ensure)
-	 (javascript-mode . eglot-ensure)
-	 (python-ts-mode . eglot-ensure)
-	 (python-ts-mode . eglot-ensure)
-	 (python-ts-mode . flyspell-prog-mode)
-         (python-ts-mode . hs-minor-mode)
-         (python-ts-mode . (lambda () (set-fill-column 88))))
+  :hook (javascript-mode . eglot-ensure)
   :config (configure-lsp))
 
 (use-package clojure-mode
-  :after eglot
-  :ensure t)
+  :ensure t
+  :hook (clojure-mode . eglot-ensure))
+
+(use-package python-mode
+  :ensure t
+  :hook ((python-ts-mode . eglot-ensure)
+	 (python-ts-mode . flyspell-prog-mode)
+         (python-ts-mode . hs-minor-mode)
+         (python-ts-mode . (lambda () (set-fill-column 88))))
+  :config
+  (setq paredit-space-for-delimiter-predicates nil))
 
 (use-package cider
   :after clojure-mode
@@ -196,13 +199,7 @@
 
 (use-package org-bullets
   :ensure t
-  :hook (org-mode . (lambda () (org-bullets-mode 1))))
-
-(use-package ob-mermaid
-  :ensure t
-  :after org
-  :config
-  (setq ob-mermaid-cli-path "/home/foca/.nvm/versions/node/v19.6.0/bin/mmdc"))
+  :hook (org-mode . org-bullets-mode))
 
 (use-package zig-mode
   :ensure t)
@@ -244,7 +241,7 @@
 (use-package apheleia
   :ensure t
   :config
-  (apheleia-global-mode +1))
+  (apheleia-global-mode 1))
 
 (use-package treesit-auto
   :ensure t
@@ -261,7 +258,7 @@
   (load custom-file)
   (load-theme 'modus-operandi)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  (setq make-backup-files nil)		; stop creating ~ files
+  (setq make-backup-files nil)  ; stop creating ~ files
   ;; custom font
   (set-frame-font "Hack-14" nil t)
 
