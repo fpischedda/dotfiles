@@ -1,16 +1,16 @@
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-(use-package magit
-  :ensure t)
-
 ;; Fix path
 (use-package exec-path-from-shell
   :ensure t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(use-package magit
+  :ensure t)
 
 (defun customize-corfu ()
   (setq
@@ -51,7 +51,9 @@
 
 (use-package vertico-posframe
   :ensure t
-  :init (vertico-posframe-mode 1))
+  :init (vertico-posframe-mode 1)
+  :config
+  (setq vertico-posframe-height 35))
 
 (use-package savehist
   :init
