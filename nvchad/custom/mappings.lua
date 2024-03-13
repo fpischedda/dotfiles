@@ -27,7 +27,7 @@ M.lsp = {
     ['<space>wr'] = {vim.lsp.buf.remove_workspace_folder},
     ['<space>D'] = {vim.lsp.buf.type_definition},
     ['<space>rn'] = {vim.lsp.buf.rename},
-    ['gr'] = {vim.lsp.buf.references},
+    ['gr'] = {"<cmd>Telescope lsp_references<cr>"},
   }
 }
 
