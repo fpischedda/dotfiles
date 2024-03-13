@@ -202,7 +202,8 @@
   :hook (org-mode . org-bullets-mode))
 
 (use-package zig-mode
-  :ensure t)
+  :ensure t
+  :hook (zig-mode . eglot-ensure))
 
 (use-package geiser
   :ensure t)
