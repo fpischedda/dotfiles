@@ -121,6 +121,12 @@
 (use-package modus-themes
   :ensure t)
 
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character))
+
 (defun g-eshell ()
   "Start eshell at the root of the current project, or in the
    current directory if the current buffer is not part of a
