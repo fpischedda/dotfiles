@@ -269,6 +269,7 @@
   ;; custom font
   (set-frame-font "Hack-14" nil t)
 
+  (setq indent-tabs-mode nil)
   (setq js-indent-level 2)
   (setq-default css-indent-offset 2)
 
@@ -276,7 +277,10 @@
   (menu-bar-mode -1)
   (global-display-line-numbers-mode)
   (enable-paredit-mode)
+
   (global-set-key (kbd "C-c s") 'g-eshell)
+  (global-set-key (kbd "C-c i") 'run-erc)
+
   (setq completion-cycle-threshold 3)
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
