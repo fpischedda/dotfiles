@@ -263,7 +263,7 @@
   :config
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
-  (load-theme 'modus-operandi)
+  (load-theme 'modus-operandi-tinted)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (setq make-backup-files nil)  ; stop creating ~ files
   ;; custom font
