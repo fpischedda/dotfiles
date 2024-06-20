@@ -267,7 +267,7 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (setq make-backup-files nil)  ; stop creating ~ files
   ;; custom font
-  (set-frame-font "Hack-14" nil t)
+  (set-frame-font "Hack-10" nil t)
 
   (setq indent-tabs-mode nil)
   (setq js-indent-level 2)
@@ -275,6 +275,7 @@
 
   (tool-bar-mode -1)
   (menu-bar-mode -1)
+  (scroll-bar-mode -1)
   (global-display-line-numbers-mode)
   (enable-paredit-mode)
 
