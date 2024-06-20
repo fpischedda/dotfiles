@@ -18,7 +18,7 @@
    corfu-auto t	;; Enable auto completion
    corfu-quit-no-match 'separator
    corfu-auto-prefix 2
-   corfu-auto-delay 0.0
+   corfu-auto-delay 0.1
    corfu-preselect-first nil
    corfu-separator ?\s)	;; Orderless field separator
   )
@@ -27,7 +27,7 @@
     (use-package corfu
       :ensure t
       ;; Optional customizations
-      :custom
+      :config
       (customize-corfu)
 
       :init
@@ -36,7 +36,7 @@
   (use-package corfu-terminal
     :ensure t
     ;; Optional customizations
-    :custom
+    :config
     (customize-corfu)
 
     :init
