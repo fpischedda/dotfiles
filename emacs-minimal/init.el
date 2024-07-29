@@ -18,7 +18,7 @@
    corfu-auto t	;; Enable auto completion
    corfu-quit-no-match 'separator
    corfu-auto-prefix 2
-   corfu-auto-delay 0.1
+   corfu-auto-delay 0
    corfu-preselect-first nil
    corfu-separator ?\s)	;; Orderless field separator
   )
@@ -149,7 +149,6 @@
                 '((:pylsp . (:configurationSources
 			     ["flake8"]
 			     :plugins (:pycodestyle (:enabled :json-false)
-						    :mccabe (:enabled :json-false)
 						    :pyflakes (:enabled :json-false)
 						    :flake8 (:enabled :json-false :maxLineLength 88)
 						    :ruff (:enabled t :lineLength 88)
@@ -257,6 +256,9 @@
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
+
+(use-package ediprolog
+  :ensure t)
 
 (use-package emacs
   :ensure nil
