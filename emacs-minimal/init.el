@@ -12,6 +12,9 @@
 (use-package magit
   :ensure t)
 
+(use-package elfeed
+  :ensure t)
+
 (defun customize-corfu ()
   (setq
    corfu-cycle t	;; Enable cycling for `corfu-next/previous'
@@ -31,7 +34,8 @@
       (customize-corfu)
 
       :init
-      (global-corfu-mode))
+      (global-corfu-mode)
+      )
 
   (use-package corfu-terminal
     :ensure t
@@ -40,7 +44,8 @@
     (customize-corfu)
 
     :init
-    (corfu-terminal-mode)))
+    (corfu-terminal-mode)
+    ))
 
 (use-package vertico
   :ensure t
@@ -292,8 +297,8 @@
   )
 
 (defun get-local-secret (name)
-  (substring 
-   (shell-command-to-string (format "pass %s" name)) 
+  (substring
+   (shell-command-to-string (format "pass %s" name))
    0 -1))
 
 (setq erc-email-userid "fpsd_codes/irc.libera.chat") ;; Example with Libera.Chat
