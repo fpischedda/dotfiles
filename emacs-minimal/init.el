@@ -222,33 +222,6 @@
   :ensure t
   :after geiser)
 
-(use-package evil
-  :ensure t
-  :bind (("C-u" . evil-scroll-up))
-  :init
-  (setq evil-want-keybinding nil))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
-(use-package evil-surround
-  :after evil
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
-(use-package undo-tree
-  :ensure t
-  :after evil
-  :diminish
-  :config
-  (evil-set-undo-system 'undo-tree)
-  (global-undo-tree-mode 1)
-  (setq undo-tree-auto-save-history nil))
-
 (use-package apheleia
   :ensure t
   :config
@@ -265,6 +238,9 @@
 (use-package ediprolog
   :ensure t)
 
+(use-package denote
+  :ensure t)
+
 (use-package emacs
   :ensure nil
   :config
@@ -272,9 +248,9 @@
   (load custom-file)
   (load-theme 'modus-operandi-tinted)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  (setq make-backup-files nil)  ; stop creating ~ files
+  (setq make-backup-files nil)		; stop creating ~ files
   ;; custom font
-  (set-frame-font "Hack-10" nil t)
+  (set-frame-font "Hack-14" nil t)
 
   (setq indent-tabs-mode nil)
   (setq js-indent-level 2)
@@ -293,7 +269,6 @@
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
 
-  (evil-mode 1)
   )
 
 (defun get-local-secret (name)
