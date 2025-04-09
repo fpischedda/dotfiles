@@ -213,7 +213,9 @@
 
 (use-package zig-mode
   :ensure t
-  :hook (zig-mode . eglot-ensure))
+  :hook (zig-mode . eglot-ensure)
+  :config
+  (setq paredit-space-for-delimiter-predicates nil))
 
 (use-package geiser
   :ensure t)
@@ -241,6 +243,10 @@
 (use-package denote
   :ensure t)
 
+(use-package writeroom-mode
+  :ensure t
+  :hook (org-mode . writeroom-mode))
+
 (use-package emacs
   :ensure nil
   :config
@@ -250,9 +256,11 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (setq make-backup-files nil)		; stop creating ~ files
   ;; custom font
-  (set-frame-font "Hack-14" nil t)
+  (add-to-list 'default-frame-alist '(font . "Hack-14"))
 
   (setq indent-tabs-mode nil)
+  (setq c-default-style "bsd"
+        c-basic-offset 4)
   (setq js-indent-level 2)
   (setq-default css-indent-offset 2)
 
